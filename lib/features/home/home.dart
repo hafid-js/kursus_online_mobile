@@ -69,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "assets/images/university_5.png",
       "assets/images/university_6.png",
       "assets/images/university_7.png",
-      "assets/images/university_8.png",
     ];
 
     return Scaffold(
