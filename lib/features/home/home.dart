@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/section_heading.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
@@ -73,7 +74,270 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.white),
+      drawer: Drawer(
+        width: 280,
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.only(left: 18, right: 18, top: 60),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Material(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(2),
+                      side: BorderSide(color: UColors.grey, width: 1),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: Center(
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Colors.black,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Material(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(2),
+                      side: BorderSide(color: UColors.grey, width: 1),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: Center(
+                          child: Icon(
+                            Icons.person_outline_outlined,
+                            color: Colors.black,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                child: TextField(
+                  cursorColor: Colors.grey,
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 16,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(color: UColors.grey, width: 1),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      borderSide: BorderSide(color: UColors.grey, width: 1),
+                    ),
+                    suffixIcon: InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        print("Search icon ditekan!");
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.search,
+                          color: HexColor.fromHex("#356DF1"),
+                        ),
+                      ),
+                    ),
+                  ),
+                  onChanged: (value) => print("Query: $value"),
+                ),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 115,
+                    height: 35,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        backgroundColor: HexColor.fromHex("#356DF1"),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Menu",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 6),
+                  SizedBox(
+                    width: 115,
+                    height: 35,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        backgroundColor: UColors.grey,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Categories",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      child: Text(
+                        "Home",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(height: 1, color: UColors.grey),
+
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      child: Text(
+                        "About Us",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(height: 1, color: UColors.grey),
+
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      child: Text(
+                        "Courses",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(height: 1, color: UColors.grey),
+
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      child: Text(
+                        "Blog",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(height: 1, color: UColors.grey),
+
+                  InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      child: Text(
+                        "Contact Us",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Divider(height: 1, color: UColors.grey),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -744,163 +1008,504 @@ class _HomeScreenState extends State<HomeScreen> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-              
-              children: [
-                Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6),
-              child: Container(
-                height: 140,
-                width: 320,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: UColors.grey),
-                ),
-                child: 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 13),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: List.generate(
-                          5,
-                          (i) => Icon(
-                            Icons.star_rounded,
-                            size: 18,
-                            color: i < 4 ? Colors.yellow[700] : Colors.grey,
-                          ),
-                        ),
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6),
+                    child: Container(
+                      height: 140,
+                      width: 320,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: UColors.grey),
                       ),
-                      SizedBox(height: 6),
-                      Expanded(
-                        child: Text(
-                          "This course completely changed the way I approach programming. The lessons are clear, and the exercises are practical. Highly recommend!",
-                          style: TextStyle(fontSize: 11),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 13,
                         ),
-                      ),
-                      SizedBox(height: 6),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          UCircularImage(
-                            image: "assets/images/instructor_8.jpg",
-                            isNetworkImage: false,
-                            height: 30,
-                            width: 30,
-                          ),
-                          SizedBox(width: 6),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kim Jong Un",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: List.generate(
+                                5,
+                                (i) => Icon(
+                                  Icons.star_rounded,
+                                  size: 18,
+                                  color: i < 4
+                                      ? Colors.yellow[700]
+                                      : Colors.grey,
                                 ),
                               ),
-                              Text(
-                                "Software Engineer",
-                                style: TextStyle(
-                                  fontSize: 9,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            ),
+                            SizedBox(height: 6),
+                            Expanded(
+                              child: Text(
+                                "This course completely changed the way I approach programming. The lessons are clear, and the exercises are practical. Highly recommend!",
+                                style: TextStyle(fontSize: 11),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
                               ),
-                            ],
-                          ),
-                          
-                        ],
+                            ),
+                            SizedBox(height: 6),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                UCircularImage(
+                                  image: "assets/images/instructor_8.jpg",
+                                  isNetworkImage: false,
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 6),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Kim Jong Un",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Software Engineer",
+                                      style: TextStyle(
+                                        fontSize: 9,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6),
+                    child: Container(
+                      height: 140,
+                      width: 320,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: UColors.grey),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 13,
+                          vertical: 13,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: List.generate(
+                                5,
+                                (i) => Icon(
+                                  Icons.star_rounded,
+                                  size: 18,
+                                  color: i < 4
+                                      ? Colors.yellow[700]
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            Expanded(
+                              child: Text(
+                                "This course completely changed the way I approach programming. The lessons are clear, and the exercises are practical. Highly recommend!",
+                                style: TextStyle(fontSize: 11),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                UCircularImage(
+                                  image: "assets/images/instructor_8.jpg",
+                                  isNetworkImage: false,
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 6),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Kim Jong Un",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Software Engineer",
+                                      style: TextStyle(
+                                        fontSize: 9,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 
-            Padding(
+            SizedBox(height: 30),
+            USectionHeading(title: "Our Latest News Feed"),
+
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
               padding: EdgeInsets.symmetric(horizontal: 6),
-              child: Container(
-                height: 140,
-                width: 320,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: UColors.grey),
-                ),
-                child: 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 13, vertical: 13),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: List.generate(
-                          5,
-                          (i) => Icon(
-                            Icons.star_rounded,
-                            size: 18,
-                            color: i < 4 ? Colors.yellow[700] : Colors.grey,
-                          ),
-                        ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Container(
+                      height: 150,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        border: BoxBorder.all(color: UColors.grey, width: 1),
                       ),
-                      SizedBox(height: 6),
-                      Expanded(
-                        child: Text(
-                          "This course completely changed the way I approach programming. The lessons are clear, and the exercises are practical. Highly recommend!",
-                          style: TextStyle(fontSize: 11),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                        ),
-                      ),
-                      SizedBox(height: 6),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      child: Row(
                         children: [
-                          UCircularImage(
-                            image: "assets/images/instructor_8.jpg",
-                            isNetworkImage: false,
-                            height: 30,
-                            width: 30,
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            ),
+                            child: Image.asset(
+                              "assets/images/news_1.jpg",
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          SizedBox(width: 6),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kim Jong Un",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 18,
                               ),
-                              Text(
-                                "Software Engineer",
-                                style: TextStyle(
-                                  fontSize: 9,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 6,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                          border: BoxBorder.all(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(Iconsax.user, size: 10),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              "By Admin",
+                                              style: TextStyle(
+                                                fontSize: 8,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(width: 6),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 6,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                          border: BoxBorder.all(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(Iconsax.messages_2, size: 10),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              "0 Comments",
+                                              style: TextStyle(
+                                                fontSize: 8,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    "Be a Member & Share Your Knowledge.",
+                                    softWrap: true,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: HexColor.fromHex("#1e1e2f"),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    "LMS allows administrators and instructors to create, organize, and deliver courses. This includes uploading course content, managing materials, and setting assessments.",
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: HexColor.fromHex("#787882"),
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: 100,
+                                      height: 30,
+                                      child: ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
+                                          ),
+                                          backgroundColor: HexColor.fromHex(
+                                            "#356DF1",
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Read More",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 6),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                          
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  SizedBox(width: 6),
+                  Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Container(
+                      height: 150,
+                      width: 350,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        border: BoxBorder.all(color: UColors.grey, width: 1),
+                      ),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              bottomLeft: Radius.circular(12),
+                            ),
+                            child: Image.asset(
+                              "assets/images/news_1.jpg",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 18,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 6,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                          border: BoxBorder.all(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(Iconsax.user, size: 10),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              "By Admin",
+                                              style: TextStyle(
+                                                fontSize: 8,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(width: 6),
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 6,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                          border: BoxBorder.all(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(Iconsax.messages_2, size: 10),
+                                            SizedBox(width: 4),
+                                            Text(
+                                              "0 Comments",
+                                              style: TextStyle(
+                                                fontSize: 8,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    "Be a Member & Share Your Knowledge.",
+                                    softWrap: true,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: HexColor.fromHex("#1e1e2f"),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6),
+                                  Text(
+                                    "LMS allows administrators and instructors to create, organize, and deliver courses. This includes uploading course content, managing materials, and setting assessments.",
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: HexColor.fromHex("#787882"),
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: 100,
+                                      height: 30,
+                                      child: ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
+                                          ),
+                                          backgroundColor: HexColor.fromHex(
+                                            "#356DF1",
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Read More",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 6),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              size: 16,
+                                              color: Colors.white,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-              ],
-            ),
-            ),
-            
 
             SizedBox(height: 30),
             Container(
