@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kursus_online_mobile/common/widgets/button/elevated_button.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -56,28 +55,39 @@ class CategoryCard extends StatelessWidget {
     //     ],
     // );
     Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Card(
-          color: HexColor.fromHex("#e2ebfe"),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-         
-          ),
-          elevation: 0,
-          // color: HexColor.fromHex("#cfe2ff").withAlpha(80),
-          child: Image.asset(icon, width: 50, height: 50, color: Colors.grey[900],),
-        ),
-        const SizedBox(height: 2),
-        SizedBox(
-          width: 60,
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Card(
+      color: HexColor.fromHex("#e2ebfe"),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: SizedBox(
+        height: 60,
+        width: 60,
+        child: Center(
+          child: Image.asset(
+            icon,
+            width: 28,
+            color: Colors.grey[900],
           ),
         ),
-      ],
-    );
+      ),
+    ),
+    const SizedBox(height: 2),
+    SizedBox(
+      width: 70,
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ],
+);
   }
 }

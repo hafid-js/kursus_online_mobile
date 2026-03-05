@@ -95,8 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.pop(context);
                       },
                       child: SizedBox(
-                        width: 30,
-                        height: 30,
+                        width: 40,
+                        height: 40,
                         child: Center(
                           child: Icon(
                             Icons.shopping_cart_outlined,
@@ -119,8 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.pop(context);
                       },
                       child: SizedBox(
-                        width: 30,
-                        height: 30,
+                        width: 40,
+                        height: 40,
                         child: Center(
                           child: Icon(
                             Icons.person_outline_outlined,
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  onChanged: (value) => print("Query: $value"),
+                  onChanged: (value) => {},
                 ),
               ),
 
@@ -341,6 +341,119 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: -40,
+                    right: -80,
+                    child: Container(
+                      width: 220,
+                      height: 220,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: HexColor.fromHex("#356DF1"),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Premier E-Learning Courses From EduCore",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 6),
+                              Text(
+                                "Nullam tincidunt tortor est, ac maximus justo gravida non phasellus dignissim quam odio ipsum sollicitudin rhoncus venenatis ex metus in turpis.",
+                                style: TextStyle(fontSize: 10),
+                              ),
+                              SizedBox(height: 12),
+                              Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                      width: 120,
+                                      height: 40,
+                                      child: ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              6,
+                                            ),
+                                          ),
+                                          backgroundColor: HexColor.fromHex(
+                                            "#356DF1",
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Start Free Trial",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            SizedBox(width: 6),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              size: 14,
+                                              color: Colors.white,
+                                            ),
+                                          ],
+                                        ),
+                                        )
+                                      ),
+                                    ),
+
+                                  ElevatedButton(onPressed: () {},style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor: HexColor.fromHex(
+                                            "#356DF1",
+                                          ),
+                                    shape: CircleBorder(),
+                                    padding: EdgeInsets.all(10)
+                                  ),
+                                   child: Icon(Icons.play_arrow_rounded, color: Colors.white,), 
+                                  ),
+                                 Expanded(child:  Text("See Our Lesson Showcase", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),) )
+                                ],
+                              )
+                              
+                            ],
+                            
+                          ),
+                          
+                        ),
+                        Image.asset(
+                          "assets/images/thumbnail-primary.png",
+                          height: 165,
+                          width: 120,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 12),
             Card(
               color: HexColor.fromHex("#d5f8ef"),
               elevation: 0,
@@ -501,7 +614,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 12),
             USectionHeading(title: "Categories"),
-            GridView.builder(
+            Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: GridView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: categories.length,
@@ -510,7 +623,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisSpacing: 4,
                 mainAxisSpacing: 2,
                 childAspectRatio: 0.9,
-              ),
+              ), 
               itemBuilder: (context, index) {
                 final item = categories[index];
 
@@ -520,9 +633,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: item.icon,
                 );
               },
-            ),
+            ),),
             Padding(
-              padding: const EdgeInsets.only(left: 100, right: 100, bottom: 30),
+              padding: const EdgeInsets.only(left: 100, right: 100, bottom: 30, top: 0),
               child: ElevatedButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -878,7 +991,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 30),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Container(
                 height: 180,
                 width: MediaQuery.of(context).size.width,
