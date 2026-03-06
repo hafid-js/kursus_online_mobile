@@ -378,28 +378,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               SizedBox(height: 12),
                               Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                      width: 120,
-                                      height: 40,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              6,
-                                            ),
-                                          ),
-                                          backgroundColor: HexColor.fromHex(
-                                            "#356DF1",
+                                    width: 120,
+                                    height: 40,
+                                    child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            6,
                                           ),
                                         ),
-                                        child: Center(
-                                          child: Row(
+                                        backgroundColor: HexColor.fromHex(
+                                          "#356DF1",
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
@@ -419,28 +419,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
-                                        )
                                       ),
                                     ),
+                                  ),
 
-                                  ElevatedButton(onPressed: () {},style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    backgroundColor: HexColor.fromHex(
-                                            "#356DF1",
-                                          ),
-                                    shape: CircleBorder(),
-                                    padding: EdgeInsets.all(10)
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      elevation: 0,
+                                      backgroundColor: HexColor.fromHex(
+                                        "#356DF1",
+                                      ),
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(10),
+                                    ),
+                                    child: Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                   child: Icon(Icons.play_arrow_rounded, color: Colors.white,), 
+                                  Expanded(
+                                    child: Text(
+                                      "See Our Lesson Showcase",
+                                      style: TextStyle(
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
-                                 Expanded(child:  Text("See Our Lesson Showcase", style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),) )
                                 ],
-                              )
-                              
+                              ),
                             ],
-                            
                           ),
-                          
                         ),
                         Image.asset(
                           "assets/images/thumbnail-primary.png",
@@ -614,28 +624,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
             SizedBox(height: 12),
             USectionHeading(title: "Categories"),
-            Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: categories.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 4,
-                mainAxisSpacing: 2,
-                childAspectRatio: 0.9,
-              ), 
-              itemBuilder: (context, index) {
-                final item = categories[index];
-
-                return CategoryCard(
-                  title: item.title,
-                  course: item.course,
-                  icon: item.icon,
-                );
-              },
-            ),),
             Padding(
-              padding: const EdgeInsets.only(left: 100, right: 100, bottom: 30, top: 0),
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: categories.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 2,
+                  childAspectRatio: 0.9,
+                ),
+                itemBuilder: (context, index) {
+                  final item = categories[index];
+
+                  return CategoryCard(
+                    title: item.title,
+                    course: item.course,
+                    icon: item.icon,
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 100,
+                right: 100,
+                bottom: 30,
+                top: 0,
+              ),
               child: ElevatedButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -690,16 +708,56 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(12),
-                              ),
-                              child: Image.asset(
-                                "assets/images/course_image_test.jpg",
-                                height: 120,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
+                            Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(12),
+                                  ),
+                                  child: Image.asset(
+                                    "assets/images/course_image_test.jpg",
+                                    height: 120,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 16,
+                                  left: 120,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: HexColor.fromHex("#356DF1"),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+
+                                    width: 70,
+                                    height: 18,
+
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.watch_later_outlined,
+                                          size: 12,
+                                          color: Colors.white,
+                                        ),
+                                        SizedBox(width: 2),
+                                        Text(
+                                          "9h 20m",
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             SizedBox(height: 6),
                             Padding(
@@ -1297,20 +1355,59 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 150,
                       width: 350,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
                         border: BoxBorder.all(color: UColors.grey, width: 1),
                       ),
                       child: Row(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
-                            ),
-                            child: Image.asset(
-                              "assets/images/news_1.jpg",
-                              fit: BoxFit.cover,
-                            ),
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(6),
+                                  bottomLeft: Radius.circular(6),
+                                ),
+                                child: Image.asset(
+                                  "assets/images/news_1.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                left: 8,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: HexColor.fromHex("#356DF1"),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+
+                                  width: 80,
+                                  height: 15,
+
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month_outlined,
+                                        size: 12,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(width: 2),
+                                      Text(
+                                        "Aug 03,2026",
+                                        style: TextStyle(
+                                          fontSize: 8,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Expanded(
                             child: Padding(
@@ -1460,20 +1557,59 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 150,
                       width: 350,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        borderRadius: BorderRadius.all(Radius.circular(6)),
                         border: BoxBorder.all(color: UColors.grey, width: 1),
                       ),
                       child: Row(
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
-                            ),
-                            child: Image.asset(
-                              "assets/images/news_1.jpg",
-                              fit: BoxFit.cover,
-                            ),
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(6),
+                                  bottomLeft: Radius.circular(6),
+                                ),
+                                child: Image.asset(
+                                  "assets/images/news_1.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                left: 8,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: HexColor.fromHex("#356DF1"),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+
+                                  width: 80,
+                                  height: 15,
+
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month_outlined,
+                                        size: 12,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(width: 2),
+                                      Text(
+                                        "Aug 03,2026",
+                                        style: TextStyle(
+                                          fontSize: 8,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Expanded(
                             child: Padding(
