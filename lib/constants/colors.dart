@@ -42,5 +42,6 @@ class UColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color transparent = Color(0x00000000);
 
-  static Color backgroundColor = HexColor.fromHex("#f7f8fb");
+  // static Color backgroundColor = HexColor.fromHex("#f7f8fb");
+  static Color backgroundColor = Colors.black;
 }
