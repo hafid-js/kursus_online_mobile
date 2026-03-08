@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:kursus_online_mobile/common/widgets/button/elevated_button_zero_radius.dart';
+import 'package:kursus_online_mobile/common/widgets/bars/rating_bar.dart';
+import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button_zero_radius.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/product_card.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/review_card.dart';
 import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_video.dart';
+import 'package:kursus_online_mobile/common/widgets/texts/course_creator.dart';
+import 'package:kursus_online_mobile/common/widgets/texts/course_header.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/section_heading.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/show_more.dart';
+import 'package:kursus_online_mobile/common/widgets/videos/course_information.dart';
+import 'package:kursus_online_mobile/common/widgets/videos/course_preview.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/device_helpers.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/cart/data/cart.dart';
+import 'package:kursus_online_mobile/features/product/data/requirement.dart';
 import 'package:kursus_online_mobile/features/product/data/review.dart';
+import 'package:kursus_online_mobile/features/product/widgets/course_purchase_section.dart';
+import 'package:kursus_online_mobile/features/product/widgets/curriculum_course_section.dart';
+import 'package:kursus_online_mobile/features/product/widgets/requirement_section.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -100,469 +108,39 @@ class _ProductScreenState extends State<ProductScreen> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Stack(
-                      children: [
-                        Column(
-                          children: [
-                            URoundedVideo(
-                              videoUrl: "assets/images/course/course_1.jpg",
-                              isNetworkVideo: false,
-                              fit: BoxFit.cover,
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 70,
-                          left: 145,
-
-                          child: Icon(
-                            Icons.play_arrow_rounded,
-                            size: 80,
-                            color: Colors.white,
-                          ),
-                        ),
-
-                        Positioned(
-                          top: 175,
-                          left: 120,
-
-                          child: Text(
-                            "Preview this course",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
+                    UCoursePreview(
+                      videoUrl: "assets/images/course/course_1.jpg",
                     ),
                     SizedBox(height: 16),
+                    UCourseHeader(
+                      title:
+                          "Deploy Java Spring Boot 4 Apps Online to Amazon Cloud (AWS)",
+                      description:
+                          "Learn how to deploy your Java Spring Boot 4 Apps online to showcase your Spring Boot Skills! (Live Internet Access)",
+                      rating: 4.6,
+                      ratingCount: 442,
+                      students: 5000,
+                    ),
 
-                    Text(
-                      "Deploy Java Spring Boot 4 Apps Online to Amazon Cloud (AWS)",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      "Learn how to deploy your Java Spring Boot 4 Apps online to showcase your Spring Boot Skills! (Live Internet Access)",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Text(
-                          "4.6",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.amber,
-                          ),
-                        ),
-                        SizedBox(width: 4),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: List.generate(
-                            5,
-                            (i) => Icon(
-                              Icons.star_rounded,
-                              size: 18,
-                              color: i < 4 ? Colors.yellow[700] : Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Text(
-                          "(442 ratings) 5k students",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "Created by ",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              TextSpan(
-                                text: "Chad Darby ",
-                                style: TextStyle(
-                                  color: HexColor.fromHex("#9432C5"),
-                                ),
-                              ),
-                              TextSpan(
-                                text: "and ",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              TextSpan(
-                                text: "Harinath Kuntamukkala",
-                                style: TextStyle(
-                                  color: HexColor.fromHex("#9432C5"),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    UCourseCreator(
+                      creators: ["Chad Darby", "Harinath Kuntamukkala"],
                     ),
                     SizedBox(height: 12),
-                    Column(
-                      children: information.map((info) {
-                        return Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(info["icon"], color: Colors.white),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      info["title"],
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  info["desc"],
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 12),
-                          ],
-                        );
-                      }).toList(),
-                    ),
+                    UCourseInformation(information: information),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Text(
-                          "Rp.149.000",
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 6),
-                    Column(
-                      children: [
-                        UElevatedButtonZeroRadius(
-                          width: UDeviceHelper.getScreenWidth(context),
-                          bgColor: HexColor.fromHex("#9432C5"),
-                          onPressed: () {},
-                          child: Text(
-                            "Buy now",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 8),
-                    Column(
-                      children: [
-                        UElevatedButtonZeroRadius(
-                          width: UDeviceHelper.getScreenWidth(context),
-                          bgColor: Colors.transparent,
-                          borderColor: Colors.white,
-                          onPressed: () {},
-                          child: Text(
-                            "Remove from cart",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                        CoursePurchaseSection(price: 149000),
                     SizedBox(height: 20),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Curriculum",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          "9 Sections • 37 lectures • 5h 45m total length",
-                          style: TextStyle(color: Colors.white, fontSize: 12),
-                        ),
-                        SizedBox(height: 12),
-                        ExpansionTile(
-                          initiallyExpanded: true,
-                          tilePadding: EdgeInsets.zero,
-                          title: Text(
-                            "Section 1 - Introduction",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
-                          trailing: Icon(
-                            isExpanded ? Icons.remove : Icons.add,
-                            color: Colors.white,
-                          ),
-                          onExpansionChanged: (expanded) {
-                            setState(() {
-                              isExpanded = expanded;
-                            });
-                          },
-                          children: [
-                            ListTile(
-                              minLeadingWidth: 0,
-                              leading: Text(
-                                "1",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Text(
-                                "Introduction",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "Video - 3.58",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.play_circle_outline_rounded,
-                                color: Colors.white,
-                              ),
-                            ),
-                            ListTile(
-                              minLeadingWidth: 0,
-                              leading: Text(
-                                "2",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Text(
-                                "Downloads PDFs and Code",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "Article",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        ExpansionTile(
-                          tilePadding: EdgeInsets.zero,
-                          title: Text(
-                            "Section 2 - Getting Started with Amazon Web Services",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
-                          trailing: Icon(
-                            isExpanded ? Icons.remove : Icons.add,
-                            color: Colors.white,
-                          ),
-                          onExpansionChanged: (expanded) {
-                            setState(() {
-                              isExpanded = expanded;
-                            });
-                          },
-                          children: [
-                            ListTile(
-                              leading: Text(
-                                "3",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Text(
-                                "Amazon Web Services Overview",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "Video - 3.58",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.play_circle_outline_rounded,
-                                color: Colors.white,
-                              ),
-                            ),
-                            ListTile(
-                              leading: Text(
-                                "4",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Text(
-                                "AWS - key Services - Part 1",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "Video - 5:15",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                            ListTile(
-                              leading: Text(
-                                "5",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Text(
-                                "Custom Domain Name Registration - Cost",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "Article",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                    CurriculumCourseSection(),
+                            SizedBox(height: 20),
 
-                        Center(
-                          child: Text(
-                            "3 more sections",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: HexColor.fromHex("#9432C5"),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                      ],
-                    ),
+                            RequirementsSection(requirements: requirement,),
                     Column(
                       children: [
-                        Row(
-                          key: requirementsKey,
-                          children: [
-                            Text(
-                              "Requirements",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            ListTile(
-                              minLeadingWidth: 0,
-                              leading: Text(
-                                "•",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                ),
-                              ),
-                              title: Text(
-                                "Basic Java Spring 3 Boot Knowledge is required",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            ListTile(
-                              minLeadingWidth: 0,
-                              leading: Text(
-                                "•",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                ),
-                              ),
-                              title: Text(
-                                "Basic Java Spring 3 Boot Knowledge is required",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            ListTile(
-                              minLeadingWidth: 0,
-                              leading: Text(
-                                "•",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                ),
-                              ),
-                              title: Text(
-                                "Basic Java Spring 3 Boot Knowledge is required",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        
                         SizedBox(height: 20),
 
                         UDescription(
@@ -697,231 +275,14 @@ class _ProductScreenState extends State<ProductScreen> {
                     USectionHeading(title: "Student feedback"),
 
                     Column(
-                      children: [
-                        Row(
-                      children: [
-
-                    Text("4,6", style: TextStyle( fontSize: 20,fontWeight: FontWeight.w400,color: Colors.white),),
-                    SizedBox(width: 6),
-                    Text("course rating",style: TextStyle(color: Colors.white),),
+                      children: const [
+                        URatingBar(progress: 0.6, stars: 5, percent: "66%"),
+                        URatingBar(progress: 0.4, stars: 4, percent: "27%"),
+                        URatingBar(progress: 0.3, stars: 3, percent: "6%"),
+                        URatingBar(progress: 0.1, stars: 2, percent: "1%"),
+                        URatingBar(progress: 0.1, stars: 1, percent: "1%"),
                       ],
                     ),
-                    SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Container(
-                          height: 18,
-                          width: 260,
-                          color: const Color.fromARGB(99, 79, 79, 79),
-                          child: FractionallySizedBox(
-                            alignment: Alignment.centerLeft,
-                            widthFactor: 0.6,
-                            child: Container(
-                              color: const Color.fromARGB(129, 79, 79, 79),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-
-                        Row(
-                          children: [
-                            Row(
-                          children: List.generate(
-                            5,
-                            (i) => Icon(
-                              Icons.star_rounded,
-                              size: 14,
-                              color: i < 5 ? Colors.yellow[700] : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-
-                        Text(
-                          "66%",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          height: 18,
-                          width: 260,
-                          color: const Color.fromARGB(99, 79, 79, 79),
-                          child: FractionallySizedBox(
-                            alignment: Alignment.centerLeft,
-                            widthFactor: 0.4,
-                            child: Container(
-                              color: const Color.fromARGB(129, 79, 79, 79),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-
-                        Row(
-                          children: [
-                            Row(
-                          children: List.generate(
-                            5,
-                            (i) => Icon(
-                              Icons.star_rounded,
-                              size: 14,
-                              color: i < 4 ? Colors.yellow[700] : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-
-                        Text(
-                          "27%",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          height: 18,
-                          width: 260,
-                          color: const Color.fromARGB(99, 79, 79, 79),
-                          child: FractionallySizedBox(
-                            alignment: Alignment.centerLeft,
-                            widthFactor: 0.3,
-                            child: Container(
-                              color: const Color.fromARGB(129, 79, 79, 79),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-
-                        Row(
-                          children: [
-                            Row(
-                          children: List.generate(
-                            5,
-                            (i) => Icon(
-                              Icons.star_rounded,
-                              size: 14,
-                              color: i < 3 ? Colors.yellow[700] : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-
-                        Text(
-                          "6%",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          height: 18,
-                          width: 260,
-                          color: const Color.fromARGB(99, 79, 79, 79),
-                          child: FractionallySizedBox(
-                            alignment: Alignment.centerLeft,
-                            widthFactor: 0.1,
-                            child: Container(
-                              color: const Color.fromARGB(129, 79, 79, 79),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-
-                        Row(
-                          children: [
-                            Row(
-                          children: List.generate(
-                            5,
-                            (i) => Icon(
-                              Icons.star_rounded,
-                              size: 14,
-                              color: i < 2 ? Colors.yellow[700] : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-
-                        Text(
-                          "1%",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          height: 18,
-                          width: 260,
-                          color: const Color.fromARGB(99, 79, 79, 79),
-                          child: FractionallySizedBox(
-                            alignment: Alignment.centerLeft,
-                            widthFactor: 0.1,
-                            child: Container(
-                              color: const Color.fromARGB(129, 79, 79, 79),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-
-                        Row(
-                          children: [
-                            Row(
-                          children: List.generate(
-                            5,
-                            (i) => Icon(
-                              Icons.star_rounded,
-                              size: 14,
-                              color: i < 1 ? Colors.yellow[700] : Colors.grey,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-
-                        Text(
-                          "1%",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                          ],
-                        )
-                      ],
-                    ),
-                    
-
-                        
-                      ],
-                    ),
-                    
 
                     SizedBox(height: 20),
                     UReviewCard(review: review),

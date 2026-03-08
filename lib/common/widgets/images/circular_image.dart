@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/constants/sizes.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 
@@ -32,7 +31,7 @@ class UCircularImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = UHelperFunctions.isDarkMode(context);
+    // final dark = UHelperFunctions.isDarkMode(context);
 
     return Container(
       width: width,
