@@ -4,12 +4,13 @@ import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 
 
 class UElevatedButtonZeroRadius extends StatelessWidget {
-  const UElevatedButtonZeroRadius({super.key, required this.onPressed, required this.child, this.bgColor, this.borderColor});
+  const UElevatedButtonZeroRadius({super.key, required this.onPressed, required this.child, this.bgColor, this.borderColor, this.width});
 
   final VoidCallback onPressed;
   final Widget child;
   final Color? bgColor;
   final Color? borderColor;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class UElevatedButtonZeroRadius extends StatelessWidget {
 );
        return SizedBox(
         height: 50,
-        width: UDeviceHelper.getScreenWidth(context),
+        width: width,
         child: ElevatedButton(onPressed: onPressed,  style: raisedButtonStyle, child: child,),
        );
   }

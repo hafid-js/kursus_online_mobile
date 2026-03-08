@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 
-class ProductCard extends StatelessWidget {
+class UProductCard extends StatelessWidget {
    final Map<String,dynamic> product;
    
-  const ProductCard({
+  const UProductCard({
     super.key, required this.product,
    
   });
@@ -34,12 +34,13 @@ class ProductCard extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
+                      color: Colors.white
                     ),
                   ),
                   Text(
                     product["instructor"],
                     style: TextStyle(
-                      color: Colors.grey[600],
+                      color: Colors.grey[200],
                       fontSize: 11,
                     ),
                   ),
@@ -51,6 +52,7 @@ class ProductCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
+                                 color: Colors.amber
                         ),
                       ),
                       SizedBox(width: 4),
@@ -70,14 +72,14 @@ class ProductCard extends StatelessWidget {
                       SizedBox(width: 4),
                       Text(
                         "(${product["students"]})",
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
                     ],
                   ),
                   SizedBox(height: 4),
                   Text(
                     product["price"],
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold,        color: Colors.white),
                   ),
                   SizedBox(height: 16),
                 ],

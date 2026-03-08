@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/product_card.dart';
+import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/features/cart/data/cart.dart';
 
 class CartScreen extends StatelessWidget {
@@ -9,11 +10,13 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: UColors.backgroundColor,
       appBar: AppBar(
+              backgroundColor: UColors.backgroundColor,
         toolbarHeight: 40,
         title: Text(
           "Cart",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
         ),
         centerTitle: true,
       ),
@@ -22,7 +25,7 @@ class CartScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           child: Column(
             children: products.map((product) {
-              return ProductCard(product: product);
+              return UProductCard(product: product);
             }).toList(),
           ),
         ),

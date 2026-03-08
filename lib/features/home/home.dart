@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   final double scrollSpeed = 1.0;
   @override
   Widget build(BuildContext context) {
