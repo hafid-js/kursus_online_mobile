@@ -5,13 +5,12 @@ class RequirementsSection extends StatelessWidget {
 
   final List<Map<String, String>> requirements;
 
+
   @override
   Widget build(BuildContext context) {
-    final GlobalKey requirementsKey = GlobalKey();
     return Column(
       children: [
         Row(
-          key: requirementsKey,
           children: [
             Text(
               "Requirements",

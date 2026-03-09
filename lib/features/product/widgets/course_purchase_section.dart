@@ -4,13 +4,16 @@ import 'package:kursus_online_mobile/constants/helpers/device_helpers.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 
 class CoursePurchaseSection extends StatelessWidget {
-  const CoursePurchaseSection({super.key, required this.price});
+  const CoursePurchaseSection({super.key, required this.price, this.sectionKey});
 
   final int price;
+
+  final Key? sectionKey;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: sectionKey,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(

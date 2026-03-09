@@ -18,6 +18,18 @@ class _UDescriptionState extends State<UDescription> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Text(
+              "Description",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
         if (widget.title != null)
           Row(
             children: [
