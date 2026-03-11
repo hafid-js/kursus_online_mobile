@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/bars/rating_bar.dart';
 import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button_zero_radius.dart';
-import 'package:kursus_online_mobile/common/widgets/cards/product_card.dart';
+import 'package:kursus_online_mobile/common/widgets/cards/course_card.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/review_card.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/course_creator.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/course_header.dart';
@@ -12,22 +12,22 @@ import 'package:kursus_online_mobile/common/widgets/videos/course_preview.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/cart/data/cart.dart';
-import 'package:kursus_online_mobile/features/product/data/information.dart';
-import 'package:kursus_online_mobile/features/product/data/requirement.dart';
-import 'package:kursus_online_mobile/features/product/data/review.dart';
-import 'package:kursus_online_mobile/features/product/widgets/course_purchase_section.dart';
-import 'package:kursus_online_mobile/features/product/widgets/curriculum_course_section.dart';
-import 'package:kursus_online_mobile/features/product/widgets/instructor_section.dart';
-import 'package:kursus_online_mobile/features/product/widgets/requirement_section.dart';
+import 'package:kursus_online_mobile/features/course/data/information.dart';
+import 'package:kursus_online_mobile/features/course/data/requirement.dart';
+import 'package:kursus_online_mobile/features/course/data/review.dart';
+import 'package:kursus_online_mobile/features/course/widgets/course_purchase_section.dart';
+import 'package:kursus_online_mobile/features/course/widgets/curriculum_course_section.dart';
+import 'package:kursus_online_mobile/features/course/widgets/instructor_section.dart';
+import 'package:kursus_online_mobile/features/course/widgets/requirement_section.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+class CourseScreen extends StatefulWidget {
+  const CourseScreen({super.key});
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  State<CourseScreen> createState() => _CourseScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _CourseScreenState extends State<CourseScreen> {
   final ScrollController _scrollController = ScrollController();
   bool showStickyButton = false;
   final GlobalKey requirementsKey = GlobalKey();
@@ -41,39 +41,42 @@ class _ProductScreenState extends State<ProductScreen> {
       final context = requirementsKey.currentContext;
 
       if (context != null) {
-       final renderObject = context.findRenderObject();
-if (renderObject is RenderBox) {
-  final position = renderObject.localToGlobal(Offset.zero);
+        final renderObject = context.findRenderObject();
+        if (renderObject is RenderBox) {
+          final position = renderObject.localToGlobal(Offset.zero);
 
-        if (position.dy <= 0) {
-          if (!showStickyButton) {
-            setState(() {
-              showStickyButton = true;
-            });
-          }
-        } else {
-          if (showStickyButton) {
-            setState(() {
-              showStickyButton = false;
-            });
+          if (position.dy <= 0) {
+            if (!showStickyButton) {
+              setState(() {
+                showStickyButton = true;
+              });
+            }
+          } else {
+            if (showStickyButton) {
+              setState(() {
+                showStickyButton = false;
+              });
+            }
           }
         }
-      }}
+      }
     });
-
   }
 
   @override
-void dispose() {
-  _scrollController.dispose();
-  super.dispose();
-}
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UColors.backgroundColor,
       appBar: AppBar(
+        foregroundColor: Colors.white,
+        actions: [Icon(Icons.ios_share)],
+        actionsPadding: EdgeInsets.only(right: 12),
         backgroundColor: UColors.backgroundColor,
       ),
       body: Stack(
@@ -91,12 +94,11 @@ void dispose() {
                   children: [
                     UCoursePreview(
                       thumbnail: "assets/images/course/course_1.jpg",
-                      videoUrl: "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+                      videoUrl:
+                          "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
                     ),
                     SizedBox(height: 16),
-                    
-                   
-                    
+
                     UCourseHeader(
                       title:
                           "Deploy Java Spring Boot 4 Apps Online to Amazon Cloud (AWS)",
@@ -114,15 +116,16 @@ void dispose() {
                     SizedBox(height: 12),
                     UCourseInformation(information: information),
                     SizedBox(height: 20),
-                    CoursePurchaseSection(price: 149000, sectionKey: requirementsKey),
+                    CoursePurchaseSection(
+                      price: 149000,
+                      sectionKey: requirementsKey,
+                    ),
                     SizedBox(height: 20),
 
                     CurriculumCourseSection(),
                     SizedBox(height: 20),
 
-                    RequirementsSection(
-                      requirements: requirement,
-                    ),
+                    RequirementsSection(requirements: requirement),
                     SizedBox(height: 20),
 
                     UDescription(
@@ -146,8 +149,8 @@ void dispose() {
                     SizedBox(height: 16),
 
                     Column(
-                      children: products.map((product) {
-                        return UProductCard(product: product);
+                      children: courses.map((course) {
+                        return UCourseCard(course: course);
                       }).toList(),
                     ),
                     Center(
@@ -259,10 +262,8 @@ void dispose() {
                 ),
               ),
             ),
-            
         ],
       ),
-      
     );
   }
 }

@@ -1,4 +1,4 @@
-    final List<Map<String, dynamic>> products = [
+    final List<Map<String, dynamic>> courses = [
       {
         "image": "assets/images/course/course_1.jpg",
         "title": "Deploy Java Spring Boot 4 Apps Online to Amazon Cloud (AWS)",

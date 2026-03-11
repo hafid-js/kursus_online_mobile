@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
-import 'package:kursus_online_mobile/common/widgets/texts/section_heading.dart';
 
 class InstructorSection extends StatelessWidget {
   const InstructorSection({super.key});

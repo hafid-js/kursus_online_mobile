@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
-import 'package:kursus_online_mobile/features/product/data/curriculum.dart';
+import 'package:kursus_online_mobile/features/course/data/curriculum.dart';
 
 class CurriculumCourseSection extends StatefulWidget {
   const CurriculumCourseSection({super.key});

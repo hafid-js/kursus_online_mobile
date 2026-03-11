@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:kursus_online_mobile/features/cart/cart.dart';
+import 'package:kursus_online_mobile/features/course_detail/course_detail.dart';
 import 'package:kursus_online_mobile/features/home/home.dart';
-import 'package:kursus_online_mobile/features/product/product.dart';
+import 'package:kursus_online_mobile/features/course/course.dart';
+import 'package:kursus_online_mobile/features/mylearning/my_learning.dart';
+import 'package:kursus_online_mobile/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +17,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
-        //
         // TRY THIS: Try running your application with "flutter run". You'll see
         // the application has a purple toolbar. Then, without quitting the app,
         // try changing the seedColor in the colorScheme below to Colors.green
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ProductScreen()
+      home: MainScreen()
     );
   }
 }

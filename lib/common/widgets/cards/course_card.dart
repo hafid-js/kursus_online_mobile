@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 
-class UProductCard extends StatelessWidget {
-   final Map<String,dynamic> product;
+class UCourseCard extends StatelessWidget {
+   final Map<String,dynamic> course;
    
-  const UProductCard({
-    super.key, required this.product,
+  const UCourseCard({
+    super.key, required this.course,
    
   });
 
@@ -17,7 +17,7 @@ class UProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             URoundedImage(
-              imageUrl: product["image"],
+              imageUrl: course["image"],
               isNetworkImage: false,
               height: 70,
               width: 70,
@@ -30,7 +30,7 @@ class UProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product["title"],
+                    course["title"],
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -38,7 +38,7 @@ class UProductCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    product["instructor"],
+                    course["instructor"],
                     style: TextStyle(
                       color: Colors.grey[200],
                       fontSize: 11,
@@ -48,7 +48,7 @@ class UProductCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        product["avg_rating"],
+                        course["avg_rating"],
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class UProductCard extends StatelessWidget {
                           (i) => Icon(
                             Icons.star_rounded,
                             size: 18,
-                            color: i < product["ratings"]
+                            color: i < course["ratings"]
                                 ? Colors.yellow[700]
                                 : Colors.grey,
                           ),
@@ -71,14 +71,14 @@ class UProductCard extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        "(${product["students"]})",
+                        "(${course["students"]})",
                         style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
                     ],
                   ),
                   SizedBox(height: 4),
                   Text(
-                    product["price"],
+                    course["price"],
                     style: TextStyle(fontWeight: FontWeight.bold,        color: Colors.white),
                   ),
                   SizedBox(height: 16),
