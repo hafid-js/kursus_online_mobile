@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 
 class UDescription extends StatefulWidget {
-  const UDescription({super.key, this.title, required this.description});
+  const UDescription({
+    super.key,
+    this.title,
+    required this.description,
+    this.isShowMore,
+  });
 
   final String? title;
   final String description;
+  final bool? isShowMore;
 
   @override
   State<UDescription> createState() => _UDescriptionState();
@@ -13,6 +19,15 @@ class UDescription extends StatefulWidget {
 
 class _UDescriptionState extends State<UDescription> {
   bool isExpanded = false;
+  late bool isShowMore;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isShowMore = widget.isShowMore ?? true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,6 +35,7 @@ class _UDescriptionState extends State<UDescription> {
       children: [
         Row(
           children: [
+             if (isShowMore)
             Text(
               "Description",
               style: TextStyle(
@@ -28,6 +44,8 @@ class _UDescriptionState extends State<UDescription> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
+            
           ],
         ),
         if (widget.title != null)
@@ -45,13 +63,18 @@ class _UDescriptionState extends State<UDescription> {
           ),
 
         const SizedBox(height: 4),
-        Text(
-          widget.description,
-          style: const TextStyle(color: Colors.white),
-          maxLines: isExpanded ? null : 5,
-          overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
-        ),
+        if (isShowMore)
+          Text(
+            widget.description,
+            style: const TextStyle(color: Colors.white),
+            maxLines: isExpanded ? null : 5,
+            overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+          )
+        else
+          Text(widget.description, style: const TextStyle(color: Colors.white)),
+
         const SizedBox(height: 8),
+            if (isShowMore)
         GestureDetector(
           onTap: () {
             setState(() {

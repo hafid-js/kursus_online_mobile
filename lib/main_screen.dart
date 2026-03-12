@@ -4,6 +4,7 @@ import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/cart/cart.dart';
 import 'package:kursus_online_mobile/features/home/home.dart';
 import 'package:kursus_online_mobile/features/mylearning/my_learning.dart';
+import 'package:kursus_online_mobile/features/search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    HomeScreen(),
+    SearchScreen(),
     MyLearningScreen(),
     CartScreen(),
     HomeScreen(),

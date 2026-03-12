@@ -5,6 +5,7 @@ import 'package:kursus_online_mobile/features/course_detail/course_detail.dart';
 import 'package:kursus_online_mobile/features/home/home.dart';
 import 'package:kursus_online_mobile/features/course/course.dart';
 import 'package:kursus_online_mobile/features/mylearning/my_learning.dart';
+import 'package:kursus_online_mobile/features/search/search_screen.dart';
 import 'package:kursus_online_mobile/main_screen.dart';
 
 void main() {

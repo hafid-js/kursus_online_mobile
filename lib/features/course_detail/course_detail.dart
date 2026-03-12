@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:kursus_online_mobile/common/widgets/texts/description.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/course_description.dart';
+import 'package:kursus_online_mobile/features/course_detail/widgets/course_more_menu.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CourseDetailScreen extends StatelessWidget {
   const CourseDetailScreen({super.key});
@@ -10,7 +15,10 @@ class CourseDetailScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: UColors.backgroundColor,
-        appBar: AppBar(backgroundColor: UColors.backgroundColor),
+        appBar: AppBar(
+          backgroundColor: UColors.backgroundColor,
+          foregroundColor: Colors.white,
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -425,32 +433,99 @@ class CourseDetailScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Column(
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.keyboard_control_rounded,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 16),
-                            Text(
-                              "About this course",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+                        CourseMoreMenu(
+                          icon: Icons.keyboard_control_rounded,
+                          title: "About this course",
+                          onTap: () {
+                            showBarModalBottomSheet(
+  expand: true,
+  backgroundColor: Colors.black,
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(
+      top: Radius.circular(20),
+    ),
+  ),
+  context: context,
+  builder: (BuildContext context) {
+    return SizedBox(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                                IconButton(
+                  icon: Icon(Icons.close, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                Center(
+                  child: Text(
+                    "About This Course",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+              const Divider(
+              color: Color.fromARGB(130, 79, 79, 79),
+              thickness: 1,
+              height: 1,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                   UDescription(description: description, isShowMore: false),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  },
+                            );
+                          }
                         ),
-                        SizedBox(height: 12,),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.keyboard_control_rounded,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 16),
-                            Text(
-                              "Course certificate",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+
+                        CourseMoreMenu(
+                          icon: Iconsax.medal_star,
+                          title: "CourseCertificate",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.file_upload_outlined,
+                          title: "Share this course",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.messenger_outline_rounded,
+                          title: "Q&A",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.edit_note_rounded,
+                          title: "Notes",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.format_list_bulleted_rounded,
+                          title: "Resources",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.notifications_none_rounded,
+                          title: "Announcements",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.star_border_rounded,
+                          title: "Add course to favorites",
+                        ),
+                        CourseMoreMenu(
+                          icon: Icons.file_download_outlined,
+                          title: "Archive course",
                         ),
                       ],
                     ),

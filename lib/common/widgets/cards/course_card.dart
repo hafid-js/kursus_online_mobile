@@ -77,6 +77,28 @@ class UCourseCard extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 4),
+                  Container(
+                          height: 5,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(99, 79, 79, 79),
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                          ),
+                          child: FractionallySizedBox(
+                            alignment: Alignment.centerLeft,
+                            widthFactor: 0.7,
+                            child: Container(color: Colors.purpleAccent),
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          '46% complete',
+                          style: TextStyle(
+                            color: Colors.grey[200],
+                            fontSize: 11,
+                          ),
+                        ),
+                  SizedBox(height: 4),
                   Text(
                     course["price"],
                     style: TextStyle(fontWeight: FontWeight.bold,        color: Colors.white),
