@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button.dart';
+import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
+import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/description.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/course_description.dart';
 import 'package:kursus_online_mobile/features/course_detail/widgets/course_more_menu.dart';
+import 'package:kursus_online_mobile/features/course_detail/widgets/qna.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CourseDetailScreen extends StatelessWidget {
@@ -22,7 +26,11 @@ class CourseDetailScreen extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(height: 200, color: Colors.pink),
+            Container(
+              height: 200,
+              color: Colors.pink,
+              child: Center(child: Text("Video Player")),
+            ),
             Padding(
               padding: EdgeInsets.all(12),
               child: Column(
@@ -64,7 +72,7 @@ class CourseDetailScreen extends StatelessWidget {
                       indicator: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            color: Colors.purpleAccent,
+                            color: Colors.deepPurpleAccent,
                             width: 3,
                           ),
                         ),
@@ -191,7 +199,7 @@ class CourseDetailScreen extends StatelessWidget {
                                   ),
                                   Icon(
                                     Icons.download_for_offline_rounded,
-                                    color: Colors.purpleAccent,
+                                    color: Colors.deepPurpleAccent,
                                   ),
                                 ],
                               ),
@@ -215,7 +223,7 @@ class CourseDetailScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.check_circle_rounded,
-                                    color: Colors.purpleAccent,
+                                    color: Colors.deepPurpleAccent,
                                     size: 18,
                                   ),
                                   SizedBox(width: 5),
@@ -266,7 +274,7 @@ class CourseDetailScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.check_circle_rounded,
-                                    color: Colors.purpleAccent,
+                                    color: Colors.deepPurpleAccent,
                                     size: 18,
                                   ),
                                   SizedBox(width: 5),
@@ -317,7 +325,7 @@ class CourseDetailScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.check_circle_rounded,
-                                    color: Colors.purpleAccent,
+                                    color: Colors.deepPurpleAccent,
                                     size: 18,
                                   ),
                                   SizedBox(width: 5),
@@ -368,7 +376,7 @@ class CourseDetailScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.check_circle_rounded,
-                                    color: Colors.purpleAccent,
+                                    color: Colors.deepPurpleAccent,
                                     size: 18,
                                   ),
                                   SizedBox(width: 5),
@@ -438,61 +446,77 @@ class CourseDetailScreen extends StatelessWidget {
                           title: "About this course",
                           onTap: () {
                             showBarModalBottomSheet(
-  expand: true,
-  backgroundColor: Colors.black,
-  shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-      top: Radius.circular(20),
-    ),
-  ),
-  context: context,
-  builder: (BuildContext context) {
-    return SizedBox(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: Alignment.centerLeft,
-              children: [
-                                IconButton(
-                  icon: Icon(Icons.close, color: Colors.white),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-                Center(
-                  child: Text(
-                    "About This Course",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-              const Divider(
-              color: Color.fromARGB(130, 79, 79, 79),
-              thickness: 1,
-              height: 1,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                   UDescription(description: description, isShowMore: false),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  },
+                              expand: true,
+                              backgroundColor: Colors.black,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
+                              ),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SizedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          alignment: Alignment.centerLeft,
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.close,
+                                                color: Colors.white,
+                                              ),
+                                              onPressed: () =>
+                                                  Navigator.of(context).pop(),
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                "About This Course",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Divider(
+                                          color: Color.fromARGB(
+                                            130,
+                                            79,
+                                            79,
+                                            79,
+                                          ),
+                                          thickness: 1,
+                                          height: 1,
+                                        ),
+                                        Expanded(
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                UDescription(
+                                                  description: description,
+                                                  isShowMore: false,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             );
-                          }
+                          },
                         ),
 
                         CourseMoreMenu(
@@ -506,6 +530,260 @@ class CourseDetailScreen extends StatelessWidget {
                         CourseMoreMenu(
                           icon: Icons.messenger_outline_rounded,
                           title: "Q&A",
+                          onTap: () {
+                            showBarModalBottomSheet(
+                              expand: true,
+                              backgroundColor: Colors.black,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
+                              ),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SizedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Stack(
+                                          alignment: Alignment.centerLeft,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () =>
+                                                  Navigator.of(context).pop(),
+                                              child: Text(
+                                                "Close",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                "Q&A",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              right: 0,
+                                              child: Icon(
+                                                Icons.filter_list_rounded,
+                                                color: Colors.white,
+                                                size: 25,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20),
+                                        Expanded(
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: 50,
+                                                  width: MediaQuery.of(
+                                                    context,
+                                                  ).size.width,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      showBarModalBottomSheet(
+                                                        expand: true,
+                                                        backgroundColor:
+                                                            Colors.black,
+                                                        shape: const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.vertical(
+                                                                top:
+                                                                    Radius.circular(
+                                                                      20,
+                                                                    ),
+                                                              ),
+                                                        ),
+                                                        context: context,
+                                                        builder: (BuildContext context) {
+                                                          return SizedBox(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets.symmetric(
+                                                                    horizontal:
+                                                                        16,
+                                                                  ),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Stack(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .centerLeft,
+                                                                    children: [
+                                                                      GestureDetector(
+                                                                        onTap: () => Navigator.of(
+                                                                          context,
+                                                                        ).pop(),
+                                                                        child: Text(
+                                                                          "Close",
+                                                                          style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      Center(
+                                                                        child: Text(
+                                                                          "Q&A",
+                                                                          style: TextStyle(
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      Positioned(
+                                                                        right:
+                                                                            0,
+                                                                        child: Icon(
+                                                                          Icons
+                                                                              .filter_list_rounded,
+                                                                          color:
+                                                                              Colors.white,
+                                                                          size:
+                                                                              25,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 20,
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: SingleChildScrollView(
+                                                                      child: Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            height:
+                                                                                50,
+                                                                            width: MediaQuery.of(
+                                                                              context,
+                                                                            ).size.width,
+                                                                            child: ElevatedButton(
+                                                                              onPressed: () {
+                                                                                print(
+                                                                                  "test",
+                                                                                );
+                                                                              },
+                                                                              style: ElevatedButton.styleFrom(
+                                                                                side: const BorderSide(
+                                                                                  color: Colors.white,
+                                                                                  width: 1,
+                                                                                ),
+                                                                                shape: const RoundedRectangleBorder(
+                                                                                  borderRadius: BorderRadius.zero,
+                                                                                ),
+                                                                              ),
+                                                                              child: const Text(
+                                                                                "Ask a question",
+                                                                                style: TextStyle(
+                                                                                  fontSize: 18,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  color: Colors.black,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                15,
+                                                                          ),
+
+                                                                          Column(
+                                                                            children: [
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                              QnaSection(),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      side: const BorderSide(
+                                                        color: Colors.white,
+                                                        width: 1,
+                                                      ),
+                                                      shape:
+                                                          const RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .zero,
+                                                          ),
+                                                    ),
+                                                    child: const Text(
+                                                      "Ask a question",
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 15),
+
+                                                Column(
+                                                  children: [
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                    QnaSection(),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
                         CourseMoreMenu(
                           icon: Icons.edit_note_rounded,

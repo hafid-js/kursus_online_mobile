@@ -1,44 +1,52 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:kursus_online_mobile/features/cart/cart.dart';
-import 'package:kursus_online_mobile/features/course_detail/course_detail.dart';
-import 'package:kursus_online_mobile/features/home/home.dart';
-import 'package:kursus_online_mobile/features/course/course.dart';
-import 'package:kursus_online_mobile/features/mylearning/my_learning.dart';
-import 'package:kursus_online_mobile/features/search/search_screen.dart';
+import 'package:get/state_manager.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:kursus_online_mobile/core/network/api_client.dart';
+import 'package:kursus_online_mobile/core/storage/token_storage.dart';
+import 'package:kursus_online_mobile/features/auth/screens/login_screen.dart';
 import 'package:kursus_online_mobile/main_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  ApiClient.init();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: MainScreen()
+      home: const SplashScreen(),
+    );
+  }
+}
+
+// SplashScreen untuk cek token
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final token = TokenStorage.getToken();
+
+    // Delay sebentar untuk menunggu GetStorage ready
+    Future.microtask(() {
+      if (token != null) {
+        Get.off(() => const MainScreen());
+      } else {
+        Get.off(() => const LoginScreen());
+      }
+    });
+
+    return const Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

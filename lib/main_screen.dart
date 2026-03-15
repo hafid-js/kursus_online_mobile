@@ -3,7 +3,8 @@ import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/cart/cart.dart';
 import 'package:kursus_online_mobile/features/home/home.dart';
-import 'package:kursus_online_mobile/features/mylearning/my_learning.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/screens/enrolled_course_screen.dart';
+import 'package:kursus_online_mobile/features/profile/screen/profile.dart';
 import 'package:kursus_online_mobile/features/search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,9 +20,9 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomeScreen(),
     SearchScreen(),
-    MyLearningScreen(),
+    EnrolledCourseScreen(),
     CartScreen(),
-    HomeScreen(),
+    ProfileScreen()
   ];
 
   void _onItemTapped(int index) {

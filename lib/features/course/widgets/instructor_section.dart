@@ -14,7 +14,7 @@ class InstructorSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Chad Darby",
+                  "Hafid (Kembaran Nicholas Saputra)",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

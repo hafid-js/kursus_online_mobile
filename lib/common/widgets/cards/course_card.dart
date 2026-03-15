@@ -87,7 +87,7 @@ class UCourseCard extends StatelessWidget {
                           child: FractionallySizedBox(
                             alignment: Alignment.centerLeft,
                             widthFactor: 0.7,
-                            child: Container(color: Colors.purpleAccent),
+                            child: Container(color: Colors.deepPurpleAccent),
                           ),
                         ),
                         SizedBox(height: 4),

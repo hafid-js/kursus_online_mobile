@@ -95,7 +95,7 @@ class _CourseScreenState extends State<CourseScreen> {
                     UCoursePreview(
                       thumbnail: "assets/images/course/course_1.jpg",
                       videoUrl:
-                          "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+                          "https://youtu.be/oI7GzbNLGOY?list=RDoI7GzbNLGOY",
                     ),
                     SizedBox(height: 16),
 
