@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:get/state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/core/storage/token_storage.dart';

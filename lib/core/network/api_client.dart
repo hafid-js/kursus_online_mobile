@@ -16,11 +16,9 @@ class ApiClient {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           final token = TokenStorage.getToken();
-          print("Token used: $token"); // DEBUG
 
           if (token != null) {
             options.headers["Authorization"] = "Bearer $token";
-            print("Request headers: ${options.headers}"); // DEBUG
           }
 
           return handler.next(options);
