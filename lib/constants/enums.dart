@@ -18,3 +18,21 @@ enum PaymentMethods {
 }
 
 enum DiscountType { fixed, percentage }
+
+
+enum UserRole {
+  student,
+  instructor,
+  unknown,
+}
+
+UserRole parseRole(String? role) {
+  switch (role) {
+    case 'student':
+      return UserRole.student;
+    case 'instructor':
+      return UserRole.instructor;
+    default:
+      return UserRole.unknown;
+  }
+}

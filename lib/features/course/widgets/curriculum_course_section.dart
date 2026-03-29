@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/course/data/curriculum.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/chapter_model.dart';
 
 class CurriculumCourseSection extends StatefulWidget {
-  const CurriculumCourseSection({super.key});
-
+  const CurriculumCourseSection({super.key, required this.chapters});
+  final List<ChapterModel> chapters;
   @override
   State<CurriculumCourseSection> createState() =>
       _CurriculumCourseSectionState();
+      
 }
 
 class _CurriculumCourseSectionState extends State<CurriculumCourseSection> {
@@ -40,7 +42,7 @@ class _CurriculumCourseSectionState extends State<CurriculumCourseSection> {
                 initiallyExpanded: true,
                 tilePadding: EdgeInsets.zero,
                 title: Text(
-                  section["title"],
+                  widget.chapters.first.title,
                   style: TextStyle(color: Colors.white, fontSize: 12),
                 ),
                 trailing: Icon(

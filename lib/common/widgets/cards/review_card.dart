@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/review_model.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/user_model.dart';
 
 class UReviewCard extends StatelessWidget {
-  final Map<String, dynamic> review;
+  final ReviewModel review;
+  final UserModel? user;
 
-  const UReviewCard({super.key, required this.review});
+  const UReviewCard({super.key, required this.review, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class UReviewCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    review["title"] ?? "",
+                    user!.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -28,15 +32,6 @@ class UReviewCard extends StatelessWidget {
 
                   Row(
                     children: [
-                      Text(
-                        "${review["avg_rating"] ?? 0}",
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.amber,
-                        ),
-                      ),
-                      const SizedBox(width: 4),
 
                       Row(
                         children: List.generate(
@@ -44,7 +39,7 @@ class UReviewCard extends StatelessWidget {
                           (i) => Icon(
                             Icons.star_rounded,
                             size: 14,
-                            color: i < (review["ratings"] ?? 0)
+                            color: i < (review.rating)
                                 ? Colors.yellow[700]
                                 : Colors.grey,
                           ),
@@ -54,7 +49,7 @@ class UReviewCard extends StatelessWidget {
                       const SizedBox(width: 4),
 
                       Text(
-                        "(${review["time"] ?? ""})",
+                        UHelperFunctions.getFormattedDate(review.createdAt),
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.white,
@@ -66,7 +61,7 @@ class UReviewCard extends StatelessWidget {
                   const SizedBox(height: 4),
 
                   Text(
-                    review["comment"] ?? "",
+                    review.review,
                     style: const TextStyle(color: Colors.white),
                   ),
 

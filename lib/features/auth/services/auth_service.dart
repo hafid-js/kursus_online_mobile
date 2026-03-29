@@ -50,18 +50,30 @@ class AuthService {
     }
   }
 
+  // Future<bool> logoutUser() async {
+  //   try {
+  //     final response = await _dio.post('/logout');
+
+  //     if (response.statusCode == 200) {
+  //       await _googleSignIn.disconnect();
+  //       TokenStorage.clearToken();
+  //       return true;
+  //     }
+  //     return false;
+  //   } catch (e) {
+  //     return false;
+  //   }
+  // }
   Future<bool> logoutUser() async {
     try {
-      final response = await _dio.post('/logout');
-
-      if (response.statusCode == 200) {
-        await _googleSignIn.disconnect();
-        TokenStorage.clearToken();
-        return true;
-      }
-      return false;
+      await _dio.post('/logout');
     } catch (e) {
-      return false;
+      // ignore 401
     }
+
+    await _googleSignIn.disconnect();
+    TokenStorage.clearToken();
+
+    return true;
   }
 }

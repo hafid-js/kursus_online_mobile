@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/bars/rating_bar.dart';
 import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button_zero_radius.dart';
-import 'package:kursus_online_mobile/common/widgets/cards/course_card.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/review_card.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/course_creator.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/course_header.dart';
@@ -10,8 +9,8 @@ import 'package:kursus_online_mobile/common/widgets/texts/description.dart';
 import 'package:kursus_online_mobile/common/widgets/videos/course_information.dart';
 import 'package:kursus_online_mobile/common/widgets/videos/course_preview.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
+import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
-import 'package:kursus_online_mobile/features/cart/data/cart.dart';
 import 'package:kursus_online_mobile/features/course/data/information.dart';
 import 'package:kursus_online_mobile/features/course/data/requirement.dart';
 import 'package:kursus_online_mobile/features/course/data/review.dart';
@@ -19,9 +18,13 @@ import 'package:kursus_online_mobile/features/course/widgets/course_purchase_sec
 import 'package:kursus_online_mobile/features/course/widgets/curriculum_course_section.dart';
 import 'package:kursus_online_mobile/features/course/widgets/instructor_section.dart';
 import 'package:kursus_online_mobile/features/course/widgets/requirement_section.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_response_wrapper.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
 
 class CourseScreen extends StatefulWidget {
-  const CourseScreen({super.key});
+  const CourseScreen({super.key, required this.courseDetail});
+  final CourseDetailResponse courseDetail;
 
   @override
   State<CourseScreen> createState() => _CourseScreenState();
@@ -93,17 +96,14 @@ class _CourseScreenState extends State<CourseScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     UCoursePreview(
-                      thumbnail: "assets/images/course/course_1.jpg",
+                      thumbnail: widget.courseDetail.course.thumbnail,
                       videoUrl:
-                          "https://youtu.be/oI7GzbNLGOY?list=RDoI7GzbNLGOY",
+                          widget.courseDetail.course.demoVideo,
                     ),
                     SizedBox(height: 16),
-
                     UCourseHeader(
-                      title:
-                          "Deploy Java Spring Boot 4 Apps Online to Amazon Cloud (AWS)",
-                      description:
-                          "Learn how to deploy your Java Spring Boot 4 Apps online to showcase your Spring Boot Skills! (Live Internet Access)",
+                      title: widget.courseDetail.course.title,
+                      description: widget.courseDetail.course.seoDescription,
                       rating: 4.6,
                       ratingCount: 442,
                       students: 5000,
@@ -114,15 +114,23 @@ class _CourseScreenState extends State<CourseScreen> {
                       creators: ["Chad Darby", "Harinath Kuntamukkala"],
                     ),
                     SizedBox(height: 12),
-                    UCourseInformation(information: information),
+                    UCourseInformation(
+                      duration: widget.courseDetail.course.duration,
+                      level: widget.courseDetail.course.level!.name,
+                      studentEnrolled: widget.courseDetail.course.studentCount
+                          .toString(),
+                      language: widget.courseDetail.course.language!.name,
+                    ),
                     SizedBox(height: 20),
                     CoursePurchaseSection(
-                      price: 149000,
+                      price: UHelperFunctions.formatRupiah(
+                        widget.courseDetail.course.price,
+                      ),
                       sectionKey: requirementsKey,
                     ),
                     SizedBox(height: 20),
 
-                    CurriculumCourseSection(),
+                    CurriculumCourseSection(chapters: widget.courseDetail.course.chapters),
                     SizedBox(height: 20),
 
                     RequirementsSection(requirements: requirement),
@@ -148,11 +156,11 @@ class _CourseScreenState extends State<CourseScreen> {
                     ),
                     SizedBox(height: 16),
 
-                    Column(
-                      children: courses.map((course) {
-                        return UCourseCard(course: course);
-                      }).toList(),
-                    ),
+                    // Column(
+                    //   children: courses.map((course) {
+                    //     return UCourseCard(course: course);
+                    //   }).toList(),
+                    // ),
                     Center(
                       child: Text(
                         "See all",
@@ -167,12 +175,17 @@ class _CourseScreenState extends State<CourseScreen> {
 
                     USectionHeading(title: "Instructors"),
 
-                    InstructorSection(),
+                    InstructorSection(
+                      instructor: widget.courseDetail.course.instructor,
+                      rating: widget.courseDetail.avgInstructorRating,
+                      studentCount: widget.courseDetail.course.studentCount.toString(),
+                      courseCount: widget.courseDetail.course.courseCount.toString()
+                    ),
 
                     SizedBox(height: 4),
                     UDescription(
                       description:
-                          "Whether you're aiming to advance your career in styling, personal branding, or image consulting, this certification will provide you with the tools to stand out as a credible and skilled Color Coach. Transform clients' wardrobes, boost their confidence, and enrich your professional journey with this comprehensive course. Gain practical insights and become a sought-after expert in the field of color analysis.",
+                          widget.courseDetail.course.instructor!.bio,
                     ),
                     SizedBox(height: 12),
 
@@ -204,16 +217,16 @@ class _CourseScreenState extends State<CourseScreen> {
                     ),
 
                     SizedBox(height: 20),
-                    UReviewCard(review: review),
-                    UReviewCard(review: review),
-                    Center(
-                      child: Text(
-                        "See all",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: HexColor.fromHex("#9432C5"),
-                        ),
-                      ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: widget.courseDetail.course.reviews.length,
+                      itemBuilder: (context, index) {
+                        final review =
+                            widget.courseDetail.course.reviews[index];
+
+                        return UReviewCard(user: review.user, review: review);
+                      },
                     ),
 
                     SizedBox(height: 100),

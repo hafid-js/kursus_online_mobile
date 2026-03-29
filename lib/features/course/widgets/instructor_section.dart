@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/user_model.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/instructor_model.dart';
 
 class InstructorSection extends StatelessWidget {
-  const InstructorSection({super.key});
+  const InstructorSection({super.key, required this.rating, required this.instructor, required this.studentCount, required this.courseCount});
+
+  final double rating;
+  final InstructorModel? instructor;
+  final String studentCount;
+   final String courseCount;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class InstructorSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hafid (Kembaran Nicholas Saputra)",
+                  instructor!.name,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -36,7 +43,7 @@ class InstructorSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                UCircularImage(image: "assets/images/instructor_8.jpg"),
+                UCircularImage(image: instructor!.image, isNetworkImage: true,),
               ],
             ),
             SizedBox(width: 12),
@@ -45,12 +52,12 @@ class InstructorSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "4.6 Instructor rating",
+                  "${rating} Instructor rating",
                   style: TextStyle(color: Colors.white),
                 ),
-                Text("173.729 Reviews", style: TextStyle(color: Colors.white)),
-                Text("912.688 Students", style: TextStyle(color: Colors.white)),
-                Text("16 Courses", style: TextStyle(color: Colors.white)),
+                Text("${instructor!.reviewCount.length} Reviews", style: TextStyle(color: Colors.white)),
+                Text("${studentCount} Students", style: TextStyle(color: Colors.white)),
+                Text("${courseCount} Courses", style: TextStyle(color: Colors.white)),
               ],
             ),
           ],

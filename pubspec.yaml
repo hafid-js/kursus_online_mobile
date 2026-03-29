@@ -46,6 +46,7 @@ dependencies:
   dio: ^5.9.2
   get_storage: ^2.1.1
   google_sign_in: ^6.3.0
+  flutter_html: ^3.0.0
 
 dev_dependencies:
   flutter_test:

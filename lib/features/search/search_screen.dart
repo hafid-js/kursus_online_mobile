@@ -109,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
               if (isFocused)
                 Column(
                   children: courses.map((course) {
-                    return UCourseCard(course: course);
+                    return Center();
                   }).toList(),
                 )
                 

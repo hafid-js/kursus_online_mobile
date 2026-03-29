@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/data/models/course_model.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/data/models/enrolled_course_wrapper.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/enrolled_course_wrapper.dart';
 
 class EnrolledCourseRepository {
   final Dio dio;
@@ -11,6 +12,12 @@ class EnrolledCourseRepository {
     final response = await dio.get('/courses?page=$page');
     final data = response.data['data']['data'] as List;
     return data.map((e) => CourseModel.fromJson(e)).toList();
+  }
+
+  Future<List<CourseDetailModel>> fetchCourseDetail(CourseModel course) async {
+    final response = await dio.get('/courses/${course.slug}');
+    final data = response.data['data']['data'] as List;
+    return data.map((e) => CourseDetailModel.fromJson(e)).toList();
   }
 
   Future<List<EnrolledCourseWrapper>> fetchEnrolledCourses() async {

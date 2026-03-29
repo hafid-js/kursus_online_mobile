@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/data/models/enrolled_course_wrapper.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/data/repositories/enrolled_course_repository.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/enrolled_course_wrapper.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/repositories/enrolled_course_repository.dart';
 
 class EnrolledCourseService {
   final EnrolledCourseRepository _repository;

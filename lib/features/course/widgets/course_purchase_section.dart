@@ -6,7 +6,7 @@ import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 class CoursePurchaseSection extends StatelessWidget {
   const CoursePurchaseSection({super.key, required this.price, this.sectionKey});
 
-  final int price;
+  final String price;
 
   final Key? sectionKey;
 
@@ -17,7 +17,7 @@ class CoursePurchaseSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Rp.$price",
+          price,
           style: TextStyle(
             fontSize: 30,
             color: Colors.white,

@@ -1,4 +1,4 @@
-import 'package:kursus_online_mobile/features/enrolled_course/data/models/course_model.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
 
 class EnrolledCourseWrapper {
   final int enrollmentId;

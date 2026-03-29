@@ -989,11 +989,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           cursorColor: HexColor.fromHex("#356DF1"),
                           style: TextStyle(color: Colors.white, fontSize: 14),
                           decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
                             contentPadding: EdgeInsets.symmetric(vertical: 12),
                             hintText: "Your Email Address ....",
                             hintStyle: TextStyle(
                               fontSize: 12,
-                              color: Colors.white,
+                              color: Colors.grey[800],
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),

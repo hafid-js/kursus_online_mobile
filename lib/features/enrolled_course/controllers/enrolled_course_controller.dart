@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/core/network/api_endpoints.dart';
 import 'package:kursus_online_mobile/core/storage/token_storage.dart';
-import '../data/models/enrolled_course_wrapper.dart';
+import '../models/enrolled_course_wrapper.dart';
 
 class EnrolledCourseController extends GetxController {
   var isLoading = true.obs;

@@ -10,7 +10,7 @@ class UDescription extends StatefulWidget {
   });
 
   final String? title;
-  final String description;
+  final String? description;
   final bool? isShowMore;
 
   @override
@@ -65,13 +65,13 @@ class _UDescriptionState extends State<UDescription> {
         const SizedBox(height: 4),
         if (isShowMore)
           Text(
-            widget.description,
+            widget.description ?? '',
             style: const TextStyle(color: Colors.white),
             maxLines: isExpanded ? null : 5,
             overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
           )
         else
-          Text(widget.description, style: const TextStyle(color: Colors.white)),
+          Text(widget.description ??'', style: const TextStyle(color: Colors.white)),
 
         const SizedBox(height: 8),
             if (isShowMore)

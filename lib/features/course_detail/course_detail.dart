@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button.dart';
-import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
-import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/description.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/course_description.dart';

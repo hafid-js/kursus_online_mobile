@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
+import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
 
 class UCourseCard extends StatelessWidget {
-   final Map<String,dynamic> course;
+   final CourseDetailModel courseDetail;
    
   const UCourseCard({
-    super.key, required this.course,
+    super.key, required this.courseDetail,
    
   });
 
@@ -17,8 +20,8 @@ class UCourseCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             URoundedImage(
-              imageUrl: course["image"],
-              isNetworkImage: false,
+              imageUrl: courseDetail.thumbnail,
+              isNetworkImage: true,
               height: 70,
               width: 70,
               fit: BoxFit.cover,
@@ -30,7 +33,7 @@ class UCourseCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    course["title"],
+                    courseDetail.title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
@@ -38,7 +41,7 @@ class UCourseCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    course["instructor"],
+                    courseDetail.instructor?.name ?? '',
                     style: TextStyle(
                       color: Colors.grey[200],
                       fontSize: 11,
@@ -48,7 +51,7 @@ class UCourseCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        course["avg_rating"],
+                        '4.5',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
@@ -63,7 +66,7 @@ class UCourseCard extends StatelessWidget {
                           (i) => Icon(
                             Icons.star_rounded,
                             size: 18,
-                            color: i < course["ratings"]
+                            color: i < 4
                                 ? Colors.yellow[700]
                                 : Colors.grey,
                           ),
@@ -71,7 +74,7 @@ class UCourseCard extends StatelessWidget {
                       ),
                       SizedBox(width: 4),
                       Text(
-                        "(${course["students"]})",
+                        "(${courseDetail.studentCount})",
                         style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
                     ],
@@ -100,7 +103,7 @@ class UCourseCard extends StatelessWidget {
                         ),
                   SizedBox(height: 4),
                   Text(
-                    course["price"],
+                    UHelperFunctions.formatRupiah(4300),
                     style: TextStyle(fontWeight: FontWeight.bold,        color: Colors.white),
                   ),
                   SizedBox(height: 16),

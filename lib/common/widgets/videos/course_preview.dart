@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_video.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -81,7 +83,7 @@ class _UCoursePreviewState extends State<UCoursePreview> {
       children: [
         URoundedVideo(
           videoUrl: widget.thumbnail,
-          isNetworkVideo: false,
+          isNetworkVideo: true,
           fit: BoxFit.cover,
         ),
 

@@ -1,17 +1,28 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/core/storage/token_storage.dart';
 import 'package:kursus_online_mobile/features/auth/screens/login_screen.dart';
+import 'package:kursus_online_mobile/features/cart/controllers/cart_controller.dart';
+import 'package:kursus_online_mobile/features/cart/repository/cart_repository.dart';
+import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
+import 'package:kursus_online_mobile/features/course/preview_screen.dart';
+import 'package:kursus_online_mobile/features/course_detail/course_detail.dart';
+import 'package:kursus_online_mobile/features/test.dart';
 import 'package:kursus_online_mobile/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   ApiClient.init();
-
+Get.put(
+  CartController(
+    CartRepository(CartService()),
+  ),
+);
   runApp(MyApp());
 }
 
