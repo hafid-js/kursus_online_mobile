@@ -499,6 +499,7 @@ class CourseDetailScreen extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
+                                                
                                                 UDescription(
                                                   description: description,
                                                   isShowMore: false,

@@ -24,7 +24,6 @@ class EnrolledCourseController extends GetxController {
     } else {
       isLoading.value = false;
       print("No token found, user needs to login");
-      // Bisa redirect ke login pakai Get.offAll(LoginScreen());
     }
   }
 

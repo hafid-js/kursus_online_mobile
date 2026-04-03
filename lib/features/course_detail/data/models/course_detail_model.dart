@@ -58,15 +58,15 @@ class CourseDetailModel {
       language: json['language'] != null
           ? CourseLanguageModel.fromJson(json['language'])
           : null,
-      studentCount: (json['instructor']['students'] as List? ?? []).length,
-      courseCount: (json['instructor']['courses'] as List? ?? []).length,
+     studentCount: (json['instructor']?['students'] as List? ?? []).length,
+courseCount: (json['instructor']?['courses'] as List? ?? []).length,
       instructor: json['instructor'] != null
           ? InstructorModel.fromJson(json['instructor'])
           : null,
       reviews: (json['reviews'] as List<dynamic>? ?? [])
           .map((e) => ReviewModel.fromJson(e))
           .toList(),
-         chapters: (json['chapters'] as List<dynamic>? ?? [])
+    chapters: (json['chapters'] as List<dynamic>? ?? [])
     .map((e) => ChapterModel.fromJson(e))
     .toList(),
     );

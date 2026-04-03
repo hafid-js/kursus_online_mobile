@@ -111,7 +111,7 @@ class _CourseScreenState extends State<CourseScreen> {
 
                     SizedBox(height: 20),
                     UCourseCreator(
-                      creators: ["Chad Darby", "Harinath Kuntamukkala"],
+                      creators: [widget.courseDetail.course.instructor!.name],
                     ),
                     SizedBox(height: 12),
                     UCourseInformation(
@@ -123,6 +123,7 @@ class _CourseScreenState extends State<CourseScreen> {
                     ),
                     SizedBox(height: 20),
                     CoursePurchaseSection(
+                      course: widget.courseDetail.course,
                       price: UHelperFunctions.formatRupiah(
                         widget.courseDetail.course.price,
                       ),
@@ -133,12 +134,12 @@ class _CourseScreenState extends State<CourseScreen> {
                     CurriculumCourseSection(chapters: widget.courseDetail.course.chapters),
                     SizedBox(height: 20),
 
-                    RequirementsSection(requirements: requirement),
-                    SizedBox(height: 20),
+                    // RequirementsSection(requirements: requirement),
+                    // SizedBox(height: 20),
 
                     UDescription(
                       description:
-                          "This course is meticulously designed for individuals passionate about color, fashion, and personal styling, aiming to achieve certification as a Color Coach. You will gain a thorough understanding of how to use the color wheel to create visually harmonious and impactful outfits, enhancing both your personal and professional styling skills. Drawing from Hellen Davis's groundbreaking book, ColorMePowerful this course leverages proven techniques and principles to guide you through the nuances of color application. By the end of the course, you'll be equipped with the knowledge and expertise needed to:",
+                          widget.courseDetail.course.description
                     ),
                     SizedBox(height: 20),
 

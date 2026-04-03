@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/course/data/curriculum.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/chapter_model.dart';
@@ -13,6 +14,9 @@ class CurriculumCourseSection extends StatefulWidget {
 }
 
 class _CurriculumCourseSectionState extends State<CurriculumCourseSection> {
+
+
+  final Map<int, bool> _expandedState = {};
   
 
   @override
@@ -30,15 +34,16 @@ class _CurriculumCourseSectionState extends State<CurriculumCourseSection> {
         ),
         SizedBox(height: 8),
         Text(
-          "9 Sections • 37 lectures • 5h 45m total length",
+          "${widget.chapters.length} Sections",
           style: TextStyle(color: Colors.white, fontSize: 12),
         ),
         SizedBox(height: 12),
-        ...curriculums.map((section) {
-          bool isExpanded = false;
-          return StatefulBuilder(
-            builder: (context, setStateTile) {
-              return ExpansionTile(
+        ...widget.chapters.asMap().entries.map((entry) {
+          int index = entry.key;
+          ChapterModel chapter = entry.value;
+          bool isExpanded = _expandedState[index] ?? false;
+
+          return ExpansionTile(
                 initiallyExpanded: true,
                 tilePadding: EdgeInsets.zero,
                 title: Text(
@@ -50,38 +55,38 @@ class _CurriculumCourseSectionState extends State<CurriculumCourseSection> {
                   color: Colors.white,
                 ),
                 onExpansionChanged: (expanded) {
-                  setStateTile(() {
-                    isExpanded = expanded;
+                  setState(() {
+                    _expandedState[index] = expanded;
                   });
                 },
-                children: [
-                  ...section["items"].map<Widget>((item) {
-                    return ListTile(
+                children: chapter.lessons.asMap().entries.map((lessonEntry) {
+                  int lessonIndex = lessonEntry.key;
+                  var lesson = lessonEntry.value;
+                 return ListTile(
                       minLeadingWidth: 0,
                       leading: Text(
-                        item["number"],
+                        "${lessonIndex + 1}",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       title: Text(
-                        item["title"],
+                        lesson.title,
                         style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
                       subtitle: Text(
-                        item["subtitle"],
+                        UHelperFunctions.formatDuration(lesson.duration),
                         style: TextStyle(color: Colors.white, fontSize: 10),
                       ),
-                      trailing: item["subtitle"].startsWith("Video")
+  
+                      trailing: lesson.fileType.startsWith("video")
                           ? Icon(
                               Icons.play_circle_outline_rounded,
                               color: Colors.white,
                             )
                           : null,
                     );
-                  }).toList(),
-                ],
+                }).toList(),
+                
               );
-            },
-          );
         }),
                 SizedBox(height: 15),
         Center(
