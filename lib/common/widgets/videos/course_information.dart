@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/course_language_model.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/level_model.dart';
 
 class UCourseInformation extends StatelessWidget {
   const UCourseInformation({super.key, required this.duration, required this.level, required this.studentEnrolled, required this.language});

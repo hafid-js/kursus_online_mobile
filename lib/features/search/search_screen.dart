@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kursus_online_mobile/common/widgets/cards/course_card.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/features/cart/data/cart.dart';
 import 'package:kursus_online_mobile/features/search/data/tags.dart';

@@ -7,6 +7,7 @@ class CourseModel {
   final String thumbnail;
   final int price;
   final String duration;
+  final String description;
   final String slug;
   final InstructorModel? instructor;
   final List<EnrollmentModel> enrollments;
@@ -18,6 +19,7 @@ class CourseModel {
     required this.thumbnail,
     required this.price,
     required this.duration,
+    required this.description,
     required this.slug,
     required this.instructor,
     required this.enrollments,
@@ -31,6 +33,7 @@ class CourseModel {
       thumbnail: json['thumbnail'],
       price: json['price'],
       duration: json['duration'],
+      description: json['description'],
       slug: json['slug'],
       enrollments: json['enrollments'] != null
           ? (json['enrollments'] as List)

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
+import 'package:kursus_online_mobile/features/course_detail/course_detail.dart';
 import 'package:kursus_online_mobile/features/enrolled_course/controllers/enrolled_course_controller.dart';
 
 class EnrolledCourseScreen extends StatelessWidget {
@@ -70,7 +71,10 @@ class EnrolledCourseScreen extends StatelessWidget {
                             //   ),
                             // ),
                             // SizedBox(height: 8),
-                            Text('Start course', style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 13, fontWeight: FontWeight.bold)),
+                            InkWell(
+                              onTap: () => Get.to(() => CourseDetailScreen(course: course, chapters: enrollment.chapters)),
+                              child: Text('Start course', style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 13, fontWeight: FontWeight.bold)),
+                            ),
                             SizedBox(height: 16),
                           ],
                         ),

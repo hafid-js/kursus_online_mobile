@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
 
 class UCourseCard extends StatelessWidget {
    final CourseDetailModel courseDetail;

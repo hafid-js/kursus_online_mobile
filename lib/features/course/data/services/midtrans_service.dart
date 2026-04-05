@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/core/storage/token_storage.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
@@ -36,7 +34,7 @@ class MidtransService {
     if (response.statusCode == 200) {
       final snapToken = response.data['token'];
       print("Snap Token: $snapToken");
-      return snapToken; // ✅ kunci
+      return snapToken;
     } else {
       print("Error: ${response.statusCode} ${response.data}");
       return null;

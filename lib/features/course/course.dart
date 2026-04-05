@@ -11,16 +11,10 @@ import 'package:kursus_online_mobile/common/widgets/videos/course_preview.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
-import 'package:kursus_online_mobile/features/course/data/information.dart';
-import 'package:kursus_online_mobile/features/course/data/requirement.dart';
-import 'package:kursus_online_mobile/features/course/data/review.dart';
 import 'package:kursus_online_mobile/features/course/widgets/course_purchase_section.dart';
 import 'package:kursus_online_mobile/features/course/widgets/curriculum_course_section.dart';
 import 'package:kursus_online_mobile/features/course/widgets/instructor_section.dart';
-import 'package:kursus_online_mobile/features/course/widgets/requirement_section.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_response_wrapper.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
 
 class CourseScreen extends StatefulWidget {
   const CourseScreen({super.key, required this.courseDetail});

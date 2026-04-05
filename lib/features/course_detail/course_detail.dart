@@ -1,14 +1,67 @@
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/description.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/course_description.dart';
+import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
+import 'package:kursus_online_mobile/features/course_detail/data/models/chapter_model.dart';
 import 'package:kursus_online_mobile/features/course_detail/widgets/course_more_menu.dart';
 import 'package:kursus_online_mobile/features/course_detail/widgets/qna.dart';
+import 'package:kursus_online_mobile/features/enrolled_course/models/course_model.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class CourseDetailScreen extends StatelessWidget {
-  const CourseDetailScreen({super.key});
+class CourseDetailScreen extends StatefulWidget {
+  const CourseDetailScreen({
+    super.key,
+    required this.course,
+    required this.chapters,
+  });
+
+  final CourseModel course;
+  final List<ChapterModel> chapters;
+
+
+
+  @override
+  State<CourseDetailScreen> createState() => _CourseDetailScreenState();
+}
+
+class _CourseDetailScreenState extends State<CourseDetailScreen>
+    with WidgetsBindingObserver {
+  late YoutubePlayerController _controller;
+  int? _selectedId;
+  String? _lessonTitle;
+  
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+
+    final url = widget.chapters[0].lessons[0].filePath;
+    final videoId = YoutubePlayer.convertUrlToId(url);
+
+    _controller = YoutubePlayerController(
+      initialVideoId: videoId!,
+      flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.detached) {
+      _controller.pause();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +79,11 @@ class CourseDetailScreen extends StatelessWidget {
             Container(
               height: 200,
               color: Colors.pink,
-              child: Center(child: Text("Video Player")),
+              child: YoutubePlayer(
+                key: ValueKey(_controller.metadata.videoId),
+                controller: _controller,
+                showVideoProgressIndicator: true,
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(12),
@@ -34,12 +91,12 @@ class CourseDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Pemrograman Java : Pemula Sampai Mahir",
+                    _lessonTitle ?? widget.course.title,
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Programmer Zaman Now",
+                    widget.course.instructor!.name,
                     style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ],
@@ -174,241 +231,118 @@ class CourseDetailScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Column(
-                      children: List.generate(1, (index) {
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                                top: 16,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Section  - Java Dasar",
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.download_for_offline_rounded,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                ],
-                              ),
-                            ),
+                      children: [
+                        ...widget.chapters.asMap().entries.map((entry) {
+                          ChapterModel chapter = entry.value;
 
-                            ListTile(
-                              contentPadding: EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                              ),
-                              minTileHeight: 0,
-                              horizontalTitleGap: 1,
-                              leading: Text(
-                                "1",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
+                          return Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  right: 16,
+                                  left: 16,
+                                  top: 16,
                                 ),
-                              ),
-                              title: Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle_rounded,
-                                    color: Colors.deepPurpleAccent,
-                                    size: 18,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Pendahuluan",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Video - 02:27 mins - Resources (2)",
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      chapter.title,
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 11,
                                         color: Colors.white,
                                       ),
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.download_for_offline_rounded,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                              ),
-                              minTileHeight: 0,
-                              horizontalTitleGap: 1,
-                              leading: Text(
-                                "2",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
+                                    Icon(
+                                      Icons.download_for_offline_rounded,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              title: Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle_rounded,
-                                    color: Colors.deepPurpleAccent,
-                                    size: 18,
+
+                              ...chapter.lessons.asMap().entries.map((
+                                lessonEntry,
+                              ) {
+                                int lessonIndex = lessonEntry.key;
+                                var lesson = lessonEntry.value;
+                                return ListTile(
+                                  selected: _selectedId == lesson.id,
+                                  selectedTileColor: Colors.pink,
+                                  onTap: () async {
+                                    final url = lesson.filePath;
+
+                                    final videoId =
+                                        YoutubePlayer.convertUrlToId(url);
+                                    if (videoId != null) {
+                                      _controller.load(videoId);
+                                    }
+
+                                    setState(() {
+                                      _selectedId = lesson.id;
+                                      _lessonTitle = lesson.title;
+                                    });
+                                  },
+                                  contentPadding: EdgeInsets.only(
+                                    right: 16,
+                                    left: 16,
                                   ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Discord Group",
+                                  minTileHeight: 0,
+                                  horizontalTitleGap: 1,
+                                  leading: Text(
+                                    "${lessonIndex + 1}",
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       color: Colors.white,
                                     ),
                                   ),
-                                ],
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Article",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.white,
+                                  title: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.check_circle_rounded,
+                                        color: Colors.deepPurpleAccent,
+                                        size: 18,
                                       ),
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.download_for_offline_rounded,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                              ),
-                              minTileHeight: 0,
-                              horizontalTitleGap: 1,
-                              leading: Text(
-                                "3",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle_rounded,
-                                    color: Colors.deepPurpleAccent,
-                                    size: 18,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Pengenalan Java",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Video - 11:04 mins",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.white,
+                                      SizedBox(width: 5),
+                                      Expanded(
+                                        child: Text(
+                                          lesson.title,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                  Icon(
-                                    Icons.download_for_offline_rounded,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                              ),
-                              minTileHeight: 0,
-                              horizontalTitleGap: 1,
-                              leading: Text(
-                                "4",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              title: Row(
-                                children: [
-                                  Icon(
-                                    Icons.check_circle_rounded,
-                                    color: Colors.deepPurpleAccent,
-                                    size: 18,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Tipe Data Number",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              subtitle: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Video - 15:03 mins",
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.white,
+                                  subtitle: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${UHelperFunctions.capitalize(lesson.fileType)} - ${lesson.duration} mins - Resources (2)",
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      Icon(
+                                        Icons.download_for_offline_rounded,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
                                   ),
-                                  Icon(
-                                    Icons.download_for_offline_rounded,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        );
-                      }),
+                                );
+                              }),
+                            ],
+                          );
+                        }),
+                      ],
                     ),
                   ),
 
@@ -499,9 +433,9 @@ class CourseDetailScreen extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                
                                                 UDescription(
-                                                  description: description,
+                                                  description:
+                                                      widget.course.description,
                                                   isShowMore: false,
                                                 ),
                                               ],
@@ -524,6 +458,16 @@ class CourseDetailScreen extends StatelessWidget {
                         CourseMoreMenu(
                           icon: Icons.file_upload_outlined,
                           title: "Share this course",
+                          onTap: () {
+                            SharePlus.instance.share(
+                              ShareParams(
+                                previewThumbnail: XFile(widget.course.thumbnail),
+                                text: 
+                                    widget.course.title,
+                                subject: widget.course.title,
+                              ),
+                            );
+                          },
                         ),
                         CourseMoreMenu(
                           icon: Icons.messenger_outline_rounded,

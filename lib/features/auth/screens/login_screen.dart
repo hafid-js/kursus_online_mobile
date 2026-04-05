@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:kursus_online_mobile/common/widgets/buttons/social_buttons.dart';
 import 'package:kursus_online_mobile/common/widgets/form/form_divider.dart';
 import 'package:kursus_online_mobile/features/auth/services/auth_service.dart';
-import 'package:kursus_online_mobile/features/enrolled_course/screens/enrolled_course_screen.dart';
-import 'package:kursus_online_mobile/features/home/home.dart';
 import 'package:kursus_online_mobile/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {

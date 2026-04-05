@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
-import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/features/cart/cart.dart';
 import 'package:kursus_online_mobile/features/home/home.dart';
 import 'package:kursus_online_mobile/features/enrolled_course/screens/enrolled_course_screen.dart';

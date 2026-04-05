@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/review_model.dart';
 
 class InstructorModel {

@@ -1,8 +1,5 @@
 import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/course_language_model.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/level_model.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/review_model.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/user_model.dart';
 
 class CourseDetailResponse {
   final CourseDetailModel course;

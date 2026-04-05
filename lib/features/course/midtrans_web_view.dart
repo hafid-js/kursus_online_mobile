@@ -110,7 +110,7 @@ class _MidtransWebViewPageState extends State<MidtransWebViewPage> {
     if (!result && mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text("Gagal menyimpan order")));
+      ).showSnackBar(const SnackBar(content: Text("Order Save Failed!")));
       Navigator.pop(context, "failed");
     }
   }

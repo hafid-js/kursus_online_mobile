@@ -114,5 +114,24 @@ static String getGreetingMessage() {
     return DateFormat(format).format(date);
   }
 
+  static String capitalize(String text) {
+  if (text.isEmpty) return text;
+  return text[0].toUpperCase() + text.substring(1);
+}
+
+
+static String getMimeType(String path) {
+  final extension = path.split('.').last.toLowerCase();
+  switch (extension) {
+    case 'jpg':
+    case 'jpeg':
+      return 'image/jpeg';
+    case 'png':
+      return 'image/png';
+    default:
+      return 'application/octet-stream'; 
+  }
+}
+
 
 }
