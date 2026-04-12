@@ -7,4 +7,6 @@ class ApiEndpoints {
 
   static const cart = "/cart";
   static String courseDetail(String slug) => "/courses/$slug";
+
+  static const getByCategory = "/courses/categories";
 }

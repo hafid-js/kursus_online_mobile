@@ -1,0 +1,20 @@
+final List<String> popularTopics = [
+  "Python",
+  "Claude Code",
+  "Web Development",
+  "Data Science",
+  "C# (programming language)",
+  "ReactJS",
+  "JavaScript",
+  "Machine Learning",
+  "SQL",
+  "AI Agents & Agentic AI",
+  "Artifical Intelligence(AI)",
+  "Java",
+  "Unreal Engine",
+  "Large Language Models (LLM)",
+  "Unity",
+  "Generative AI (GenAI)",
+  "C++ (programming language)",
+  "Game Development Fundamentals"
+];
