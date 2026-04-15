@@ -1,8 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
+import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
+import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/features/cart/data/cart.dart';
+import 'package:kursus_online_mobile/features/search/controllers/category_controller.dart';
 import 'package:kursus_online_mobile/features/search/data/tags.dart';
+import 'package:kursus_online_mobile/features/search/repositories/category_repository.dart';
+import 'package:kursus_online_mobile/features/search/services/category_service.dart';
 import 'package:kursus_online_mobile/features/search/widgets/search_categories.dart';
+import 'package:kursus_online_mobile/features/subcategories/subcategories.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -15,11 +23,13 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focusNode = FocusNode();
   bool isFocused = false;
   final TextEditingController _searchController = TextEditingController();
-
+  late final CategoryController controller;
   @override
   void initState() {
     super.initState();
-
+    controller = Get.put(
+      CategoryController(CategoryRepository(CategoryService(ApiClient.dio))),
+    );
     _focusNode.addListener(() {
       setState(() {
         isFocused = _focusNode.hasFocus;
@@ -111,7 +121,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     return Center();
                   }).toList(),
                 )
-                
               else
                 Column(
                   children: [
@@ -132,31 +141,36 @@ class _SearchScreenState extends State<SearchScreen> {
                               vertical: 6,
                             ),
                             decoration: BoxDecoration(
-                              border: BoxBorder.all(
-                                color: Colors.white
-                              ),
+                              border: BoxBorder.all(color: Colors.white),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               tag,
-                              style: TextStyle(fontSize: 12,color: Colors.white, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         );
                       }).toList(),
                     ),
-                    SearchCategories(title: "Development"),
-                    SearchCategories(title: "IT & Software"),
-                    SearchCategories(title: "Business"),
-                    SearchCategories(title: "Finance & Accounting"),
-                    SearchCategories(title: "Office Productivity"),
-                    SearchCategories(title: "Design"),
-                    SearchCategories(title: "Marketing"),
-                    SearchCategories(title: "Lifestyle"),
-                    SearchCategories(title: "Photography & Video"),
-                    SearchCategories(title: "Health & Fitness"),
-                    SearchCategories(title: "Music"),
-                    SearchCategories(title: "Teaching & Academics"),
+
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      return Wrap(
+                        children: controller.categories.map((category) {
+                          return InkWell(
+                            onTap: () => Get.to(() => SubCategoriesScreen(), arguments: category.id),
+                            child: SearchCategories(title: category.name),
+                          );
+                        }).toList(),
+                      );
+                    }),
                   ],
                 ),
             ],

@@ -8,7 +8,6 @@ import 'package:kursus_online_mobile/features/auth/screens/login_screen.dart';
 import 'package:kursus_online_mobile/features/cart/controllers/cart_controller.dart';
 import 'package:kursus_online_mobile/features/cart/repository/cart_repository.dart';
 import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
-import 'package:kursus_online_mobile/features/subcategories/subcategories.dart';
 import 'package:kursus_online_mobile/main_screen.dart';
 
 void main() async {
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SubCategoriesScreen()
+      home: MainScreen()
     );
   }
 }

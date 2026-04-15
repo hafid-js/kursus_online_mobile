@@ -2,7 +2,7 @@ class PopularInstructorModel {
   final int id;
   final String name;
   final String image;
-  final String? headline;
+  final String headline;
   final int coursesCount;
   final int studentsCount;
 
@@ -10,7 +10,7 @@ class PopularInstructorModel {
     required this.id,
     required this.name,
     required this.image,
-    this.headline,
+    required this.headline,
     required this.coursesCount,
     required this.studentsCount,
   });
@@ -24,7 +24,7 @@ class PopularInstructorModel {
       name: (json['name'] ?? '').toString(),
       image: (json['image'] ?? '').toString(),
 
-      headline: json['headline']?.toString(),
+      headline: (json['headline'] ?? '-').toString(),
 
       coursesCount: (json['courses_count'] ?? 0) is int
           ? json['courses_count']

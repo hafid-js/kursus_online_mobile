@@ -8,10 +8,10 @@ import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/features/subcategories/controllers/get_by_category_controller.dart';
 import 'package:kursus_online_mobile/features/subcategories/data/popular_topics.dart';
-import 'package:kursus_online_mobile/features/subcategories/data/subcategories.dart';
 
 class SubCategoriesScreen extends StatelessWidget {
   SubCategoriesScreen({super.key});
+
 
   final GetByCategoryController controller = Get.put(GetByCategoryController());
 
@@ -21,17 +21,30 @@ class SubCategoriesScreen extends StatelessWidget {
       backgroundColor: UColors.backgroundColor,
       appBar: AppBar(backgroundColor: UColors.backgroundColor),
       body: Obx(() {
-        final data = controller.getByCategory.value;
+
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
-        } else if (data == null) {
+        }
+        
+        final data = controller.getByCategory.value;
+         if (controller.errorMessage.value != null) {
+    return Center(
+      child: Text(
+        controller.errorMessage.value!,
+        style: const TextStyle(color: Colors.red),
+      ),
+    );
+  }
+
+        
+         if (data == null) {
           return Center(
             child: Text(
               "No Sub Category Found!",
               style: TextStyle(color: Colors.white),
             ),
           );
-        } else {
+        } 
           return Padding(
             padding: EdgeInsetsGeometry.symmetric(horizontal: 12),
             child: SingleChildScrollView(
@@ -93,8 +106,32 @@ class SubCategoriesScreen extends StatelessWidget {
                     height: 310,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: data.coursesGetStarted.length,
+                      itemCount: data.coursesGetStarted.length + 1,
                       itemBuilder: (context, index) {
+                        if (index == data.coursesGetStarted.length) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: GestureDetector(
+            onTap: () {
+              // TODO: aksi ketika klik See All
+            },
+            child: Container(
+              width: 120,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                "See All",
+                style: TextStyle(
+                  color: Colors.pink,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        );
+      }
                         final course = data.coursesGetStarted[index];
                         return Padding(
                           padding: const EdgeInsets.only(right: 12),
@@ -179,11 +216,16 @@ class SubCategoriesScreen extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                              
                             ),
+                            
                           ),
+                          
                         );
                       },
+                      
                     ),
+                    
                   ),
                   SizedBox(width: 8),
 
@@ -225,49 +267,54 @@ class SubCategoriesScreen extends StatelessWidget {
                   SizedBox(height: 20),
                   USectionHeading(title: "Popular Instructors", titleSize: 25),
 
-                  Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  SizedBox(
+                    height: 180,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                    itemCount: data.popularInstructor.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2, mainAxisSpacing: 12.0, crossAxisSpacing: 1.4, childAspectRatio: 0.32),
+                    itemBuilder: (context, index) {
+                      final instructor = data.popularInstructor[index];
+                      return Column(
                         children: [
                           Row(
                             children: [
                               UCircularImage(
-                                image: "assets/images/instructor_8.jpg",
-                                isNetworkImage: false,
+                                image: instructor.image,
+                                isNetworkImage: true,
                               ),
-                            ],
-                          ),
                           SizedBox(width: 12),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Kim Jong Un",
+                                instructor.name,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
-                                "Mobile Developer",
+                                instructor.headline,
                                 style: TextStyle(color: Colors.white),
                               ),
                               Text(
-                                "30 Students",
+                                "${instructor.studentsCount} Students",
                                 style: TextStyle(color: Colors.white),
                               ),
                               Text(
-                                "4 Courses",
+                                "${instructor.coursesCount} Courses",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
+                                                      ],
+                          ),
                         ],
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                      );
+                    },
+                    ),
                   ),
 
                   SizedBox(height: 20),
@@ -276,6 +323,8 @@ class SubCategoriesScreen extends StatelessWidget {
                   SizedBox(
                     height: 310,
                     child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: data.allCourses.length,
                       itemBuilder: (context, index) {
                         final course = data.allCourses[index];
@@ -406,8 +455,8 @@ class SubCategoriesScreen extends StatelessWidget {
             ),
           );
         }
-      }),
-    );
+      
+    ));
   }
 }
 

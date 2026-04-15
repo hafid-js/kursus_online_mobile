@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:kursus_online_mobile/core/network/api_endpoints.dart';
 import 'package:path_provider/path_provider.dart';
 
 class UHelperFunctions{
@@ -131,6 +133,16 @@ static String getMimeType(String path) {
     default:
       return 'application/octet-stream'; 
   }
+}
+
+  static Dio dioCreate() {
+    return Dio(
+      BaseOptions(
+        baseUrl: ApiEndpoints.baseUrl,
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+      ),
+    );
 }
 
 

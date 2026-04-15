@@ -33,7 +33,7 @@ class UCircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final dark = UHelperFunctions.isDarkMode(context);
 
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       // padding: EdgeInsets.all(padding),
