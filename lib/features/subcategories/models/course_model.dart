@@ -1,6 +1,7 @@
 class CourseModel {
   final int id;
   final String title;
+  final String slug;
   final String thumbnail;
   final int price;
   final String? instructorName;
@@ -9,6 +10,7 @@ class CourseModel {
   CourseModel({
     required this.id,
     required this.title,
+    required this.slug,
     required this.thumbnail,
     required this.price,
     this.instructorName,
@@ -19,6 +21,7 @@ class CourseModel {
     return CourseModel(
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
+      slug: json['slug'] ?? '',
       thumbnail: json['thumbnail'] ?? '',
       price: (json['price'] ?? 0) as int,
 

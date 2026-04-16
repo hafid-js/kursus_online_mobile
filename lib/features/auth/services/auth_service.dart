@@ -45,8 +45,7 @@ class AuthService {
       }
       return false;
     } catch (e) {
-      print("Google login error: $e");
-      throw e;
+      rethrow;
     }
   }
 

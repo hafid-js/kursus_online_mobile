@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/course_card.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';

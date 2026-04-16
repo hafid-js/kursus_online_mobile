@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
-import 'package:kursus_online_mobile/features/course_detail/data/models/user_model.dart';
 import 'package:kursus_online_mobile/features/enrolled_course/models/instructor_model.dart';
 
 class InstructorSection extends StatelessWidget {
@@ -52,12 +51,12 @@ class InstructorSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${rating} Instructor rating",
+                  "$rating Instructor rating",
                   style: TextStyle(color: Colors.white),
                 ),
                 Text("${instructor!.reviewCount.length} Reviews", style: TextStyle(color: Colors.white)),
-                Text("${studentCount} Students", style: TextStyle(color: Colors.white)),
-                Text("${courseCount} Courses", style: TextStyle(color: Colors.white)),
+                Text("$studentCount Students", style: TextStyle(color: Colors.white)),
+                Text("$courseCount Courses", style: TextStyle(color: Colors.white)),
               ],
             ),
           ],

@@ -627,9 +627,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                                                             ).size.width,
                                                                             child: ElevatedButton(
                                                                               onPressed: () {
-                                                                                print(
-                                                                                  "test",
-                                                                                );
                                                                               },
                                                                               style: ElevatedButton.styleFrom(
                                                                                 side: const BorderSide(

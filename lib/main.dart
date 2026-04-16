@@ -8,7 +8,6 @@ import 'package:kursus_online_mobile/features/auth/screens/login_screen.dart';
 import 'package:kursus_online_mobile/features/cart/controllers/cart_controller.dart';
 import 'package:kursus_online_mobile/features/cart/repository/cart_repository.dart';
 import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
-import 'package:kursus_online_mobile/features/instructor/instructor_screen.dart';
 import 'package:kursus_online_mobile/main_screen.dart';
 
 void main() async {

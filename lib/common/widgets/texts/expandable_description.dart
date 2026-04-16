@@ -3,7 +3,7 @@ import 'package:kursus_online_mobile/constants/colors.dart';
 
 class ExpandableDescription extends StatefulWidget {
   final String description;
-  const ExpandableDescription({required this.description});
+  const ExpandableDescription({super.key, required this.description});
 
   @override
   State<ExpandableDescription> createState() => _ExpandableDescriptionState();

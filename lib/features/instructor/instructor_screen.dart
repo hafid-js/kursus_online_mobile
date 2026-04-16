@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:kursus_online_mobile/common/widgets/images/circular_image.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/description.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/section_heading.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
-import 'package:kursus_online_mobile/features/course/widgets/instructor_section.dart';
+import 'package:kursus_online_mobile/features/course/course.dart';
+import 'package:kursus_online_mobile/features/course_detail/services/course_detail_service.dart';
 import 'package:kursus_online_mobile/features/instructor/controllers/instructor_controller.dart';
 
 class InstructorScreen extends StatelessWidget {
@@ -20,13 +19,15 @@ class InstructorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UColors.backgroundColor,
-      appBar: AppBar(),
-      body:
-      Obx(() {
+      appBar: AppBar(
+        backgroundColor: UColors.backgroundColor,
+        foregroundColor: Colors.white,
+      ),
+      body: Obx(() {
         if (controller.isLoading.value) {
           return Center(child: CircularProgressIndicator());
         }
-                if (controller.errorMessage.value != null) {
+        if (controller.errorMessage.value != null) {
           return Center(
             child: Text(
               controller.errorMessage.value!,
@@ -36,7 +37,7 @@ class InstructorScreen extends StatelessWidget {
         }
 
         final data = controller.instructorCourses.value;
-        
+
         if (data == null) {
           return Center(
             child: Text(
@@ -47,108 +48,107 @@ class InstructorScreen extends StatelessWidget {
         }
         final instructor = data.instructor;
         final courses = data.allCourses;
-        return
-       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: SingleChildScrollView(
-          child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Column(
               children: [
-                UCircularImage(
-                  image: instructor.first.image,
-                  isNetworkImage: true,
-                  width: 80,
-                  height: 80,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    UCircularImage(
+                      image: instructor.first.image,
+                      isNetworkImage: true,
+                      width: 80,
+                      height: 80,
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            instructor.first.name,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Spectral",
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            instructor.first.headline,
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        instructor.first.name,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Spectral",
+
+                SizedBox(height: 30),
+
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Course students",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        instructor.first.headline,
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 30),
-
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Course students",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                        SizedBox(height: 8),
+                        Text(
+                          instructor.first.studentsCount.toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      instructor.first.studentsCount.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    SizedBox(width: 30),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Reviews",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          instructor.first.reviewsCount.toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                SizedBox(width: 30),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Reviews",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      instructor.first.reviewsCount.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+
+                SizedBox(height: 20),
+
+                UDescription(
+                  title: "About me",
+                  description: instructor.first.bio,
                 ),
-              ],
-            ),
 
-                    SizedBox(height: 20),
+                SizedBox(height: 20),
+                USectionHeading(title: "My Courses (8)"),
 
-            UDescription(
-              title: "About me",
-              description:
-                  instructor.first.bio,
-            ),
-
-            SizedBox(height: 20),
-            USectionHeading(title: "My Courses (8)"),
-
-            SizedBox(
+                SizedBox(
                   height: 310,
                   child: ListView.builder(
                     shrinkWrap: true,
@@ -156,7 +156,15 @@ class InstructorScreen extends StatelessWidget {
                     itemCount: courses.length,
                     itemBuilder: (context, index) {
                       final course = courses[index];
-                      return Column(
+                      return GestureDetector(
+                        onTap: () async {
+                          final courseDetail = await CourseDetailService().getCourse(
+                      course.slug,
+                    );
+
+                    Get.to(() => CourseScreen(courseDetail: courseDetail, cartId: course.id));
+                        },
+                        child: Column(
                         children: [
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -273,15 +281,16 @@ class InstructorScreen extends StatelessWidget {
                             ],
                           ),
                         ],
+                      ),
                       );
                     },
                   ),
                 ),
-          ],
-        ),
-        )
-      );
-      })
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 }

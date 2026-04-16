@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/core/network/api_endpoints.dart';
 import 'package:kursus_online_mobile/features/search/models/category_model.dart';
 

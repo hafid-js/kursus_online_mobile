@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/state_manager.dart';
 import 'package:kursus_online_mobile/common/widgets/bars/rating_bar.dart';
 import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button_zero_radius.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/review_card.dart';
@@ -13,9 +11,6 @@ import 'package:kursus_online_mobile/common/widgets/videos/course_preview.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
-import 'package:kursus_online_mobile/features/cart/controllers/cart_controller.dart';
-import 'package:kursus_online_mobile/features/cart/repository/cart_repository.dart';
-import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
 import 'package:kursus_online_mobile/features/course/widgets/course_purchase_section.dart';
 import 'package:kursus_online_mobile/features/course/widgets/curriculum_course_section.dart';
 import 'package:kursus_online_mobile/features/course/widgets/instructor_section.dart';

@@ -90,10 +90,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.emailAddress,
                 style: const TextStyle(color: Colors.white),
                 validator: (value) {
-                  if (value == null || value.isEmpty)
+                  if (value == null || value.isEmpty) {
                     return 'Email cannot be empty';
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value))
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                     return 'Enter a valid email';
+                  }
                   return null;
                 },
               ),
@@ -112,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('Forgot Password clicked!');
                     },
                     child: const Text(
                       'Forgot Password?',
@@ -151,10 +152,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: _obscurePassword,
                 style: const TextStyle(color: Colors.white),
                 validator: (value) {
-                  if (value == null || value.isEmpty)
+                  if (value == null || value.isEmpty) {
                     return 'Password cannot be empty';
-                  if (value.length < 6)
+                  }
+                  if (value.length < 6) {
                     return 'Password must be at least 6 characters';
+                  }
                   return null;
                 },
               ),

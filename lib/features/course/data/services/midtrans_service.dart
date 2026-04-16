@@ -33,14 +33,11 @@ class MidtransService {
 
     if (response.statusCode == 200) {
       final snapToken = response.data['token'];
-      print("Snap Token: $snapToken");
       return snapToken;
     } else {
-      print("Error: ${response.statusCode} ${response.data}");
       return null;
     }
   } catch (e) {
-    print("Request failed: $e");
     return null;
   }
 }

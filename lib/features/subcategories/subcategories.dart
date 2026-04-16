@@ -7,7 +7,8 @@ import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/common/widgets/texts/section_heading.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
-import 'package:kursus_online_mobile/features/instructor/controllers/instructor_controller.dart';
+import 'package:kursus_online_mobile/features/course/course.dart';
+import 'package:kursus_online_mobile/features/course_detail/services/course_detail_service.dart';
 import 'package:kursus_online_mobile/features/instructor/instructor_screen.dart';
 import 'package:kursus_online_mobile/features/subcategories/controllers/get_by_category_controller.dart';
 import 'package:kursus_online_mobile/features/subcategories/data/popular_topics.dart';
@@ -16,13 +17,12 @@ class SubCategoriesScreen extends StatelessWidget {
   SubCategoriesScreen({super.key});
 
   final GetByCategoryController controller = Get.put(GetByCategoryController());
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UColors.backgroundColor,
-appBar: AppBar(
+      appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: UColors.backgroundColor,
       ),
@@ -33,7 +33,7 @@ appBar: AppBar(
 
         final data = controller.getByCategory.value;
         final courses = data!.coursesGetStarted;
-final showSeeAll = courses.length > 1;
+        final showSeeAll = courses.length > 1;
         if (controller.errorMessage.value != null) {
           return Center(
             child: Text(
@@ -43,7 +43,7 @@ final showSeeAll = courses.length > 1;
           );
         }
 
-        if (data!.allCourses.isEmpty) {
+        if (data.allCourses.isEmpty) {
           return Center(
             child: Text(
               "No Sub Category Found!",
@@ -110,29 +110,28 @@ final showSeeAll = courses.length > 1;
                     itemBuilder: (context, index) {
                       if (index == data.coursesGetStarted.length) {
                         if (showSeeAll && index == courses.length) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: GestureDetector(
-                            onTap: () {
-                     
-                            },
-                            child: Container(
-                              width: 120,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                "See All",
-                                style: TextStyle(
-                                  color: Colors.pink,
-                                  fontWeight: FontWeight.bold,
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                width: 120,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  "See All",
+                                  style: TextStyle(
+                                    color: Colors.pink,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      }}
+                          );
+                        }
+                      }
                       final course = data.coursesGetStarted[index];
                       return Padding(
                         padding: const EdgeInsets.only(right: 12),
@@ -268,7 +267,9 @@ final showSeeAll = courses.length > 1;
                     scrollDirection: Axis.horizontal,
                     itemCount: data.popularInstructor.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: data.popularInstructor.length == 1 ? 1 : 2,
+                      crossAxisCount: data.popularInstructor.length == 1
+                          ? 1
+                          : 2,
                       mainAxisSpacing: 12.0,
                       crossAxisSpacing: 1.4,
                       childAspectRatio: 0.32,
@@ -279,44 +280,44 @@ final showSeeAll = courses.length > 1;
                         children: [
                           InkWell(
                             onTap: () => Get.to(
-  () => InstructorScreen(),
-  arguments: instructor.id,
-),
+                              () => InstructorScreen(),
+                              arguments: instructor.id,
+                            ),
                             child: Row(
-                            children: [
-                              UCircularImage(
-                                image: instructor.image,
-                                isNetworkImage: true,
-                              ),
-                              SizedBox(width: 12),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    instructor.name,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                              children: [
+                                UCircularImage(
+                                  image: instructor.image,
+                                  isNetworkImage: true,
+                                ),
+                                SizedBox(width: 12),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      instructor.name,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    instructor.headline,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  Text(
-                                    "${instructor.studentsCount} Students",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  Text(
-                                    "${instructor.coursesCount} Courses",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    Text(
+                                      instructor.headline,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      "${instructor.studentsCount} Students",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Text(
+                                      "${instructor.coursesCount} Courses",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          )
                         ],
                       );
                     },
@@ -334,123 +335,137 @@ final showSeeAll = courses.length > 1;
                     itemCount: data.allCourses.length,
                     itemBuilder: (context, index) {
                       final course = data.allCourses[index];
-                      return Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              URoundedImage(
-                                imageUrl: course.thumbnail,
-                                isNetworkImage: true,
-                                height: 70,
-                                width: 70,
-                                fit: BoxFit.cover,
-                                borderRadius: 6,
-                              ),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      course.title,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      course.instructorName ?? '',
-                                      style: TextStyle(
-                                        color: Colors.grey[200],
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          '4.5',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.amber,
-                                          ),
+                      return GestureDetector(
+                        onTap: () async {
+                          final courseDetail = await CourseDetailService()
+                              .getCourse(course.slug);
+
+                          Get.to(
+                            () => CourseScreen(
+                              courseDetail: courseDetail,
+                              cartId: course.id,
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                URoundedImage(
+                                  imageUrl: course.thumbnail,
+                                  isNetworkImage: true,
+                                  height: 70,
+                                  width: 70,
+                                  fit: BoxFit.cover,
+                                  borderRadius: 6,
+                                ),
+                                SizedBox(width: 8),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        course.title,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                          color: Colors.white,
                                         ),
-                                        SizedBox(width: 4),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: List.generate(
-                                            5,
-                                            (i) => Icon(
-                                              Icons.star_rounded,
-                                              size: 18,
-                                              color: i < 4
-                                                  ? Colors.yellow[700]
-                                                  : Colors.grey,
+                                      ),
+                                      Text(
+                                        course.instructorName ?? '',
+                                        style: TextStyle(
+                                          color: Colors.grey[200],
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '4.5',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.amber,
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(width: 4),
-                                        Text(
-                                          course.reviewCount.toString(),
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
+                                          SizedBox(width: 4),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: List.generate(
+                                              5,
+                                              (i) => Icon(
+                                                Icons.star_rounded,
+                                                size: 18,
+                                                color: i < 4
+                                                    ? Colors.yellow[700]
+                                                    : Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 4),
+                                          Text(
+                                            course.reviewCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 4),
+                                      Container(
+                                        height: 5,
+                                        width: 300,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                            99,
+                                            79,
+                                            79,
+                                            79,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(30),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 4),
-                                    Container(
-                                      height: 5,
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                          99,
-                                          79,
-                                          79,
-                                          79,
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(30),
+                                        child: FractionallySizedBox(
+                                          alignment: Alignment.centerLeft,
+                                          widthFactor: 0.7,
+                                          child: Container(
+                                            color: Colors.deepPurpleAccent,
+                                          ),
                                         ),
                                       ),
-                                      child: FractionallySizedBox(
-                                        alignment: Alignment.centerLeft,
-                                        widthFactor: 0.7,
-                                        child: Container(
-                                          color: Colors.deepPurpleAccent,
+                                      SizedBox(height: 4),
+                                      Text(
+                                        '46% complete',
+                                        style: TextStyle(
+                                          color: Colors.grey[200],
+                                          fontSize: 11,
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      '46% complete',
-                                      style: TextStyle(
-                                        color: Colors.grey[200],
-                                        fontSize: 11,
+                                      SizedBox(height: 4),
+                                      Text(
+                                        UHelperFunctions.formatRupiah(
+                                          course.price,
+                                        ),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 4),
-                                    Text(
-                                      UHelperFunctions.formatRupiah(
-                                        course.price,
-                                      ),
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    SizedBox(height: 16),
-                                  ],
+                                      SizedBox(height: 16),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       );
                     },
                   ),

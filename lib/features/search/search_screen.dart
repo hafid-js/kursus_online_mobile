@@ -1,8 +1,7 @@
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
-import 'package:kursus_online_mobile/constants/helpers/helper_functions.dart';
 import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/features/cart/data/cart.dart';
 import 'package:kursus_online_mobile/features/search/controllers/category_controller.dart';

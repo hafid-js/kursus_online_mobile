@@ -38,7 +38,6 @@ class ApiClient {
 
       return UserModel.fromJson(response.data);
     } catch (e) {
-      print("Error getUser: $e");
       throw Exception("Failed to get user: $e");
     }
   }

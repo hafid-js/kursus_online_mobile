@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kursus_online_mobile/core/storage/token_storage.dart';
 import 'package:kursus_online_mobile/features/cart/repository/cart_repository.dart';
-import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
 import '../models/cart_model.dart';
 
 class CartController extends GetxController {
