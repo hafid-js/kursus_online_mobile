@@ -3,17 +3,24 @@ import 'package:kursus_online_mobile/common/widgets/buttons/elevated_button_zero
 import 'package:kursus_online_mobile/constants/helpers/device_helpers.dart';
 import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 import 'package:kursus_online_mobile/core/network/api_client.dart';
+import 'package:kursus_online_mobile/features/cart/controllers/cart_controller.dart';
+import 'package:kursus_online_mobile/features/cart/repository/cart_repository.dart';
+import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
 import 'package:kursus_online_mobile/features/course/data/services/midtrans_service.dart';
 import 'package:kursus_online_mobile/features/course/midtrans_web_view.dart';
 import 'package:kursus_online_mobile/features/course_detail/data/models/course_detail_model.dart';
 
 class CoursePurchaseSection extends StatelessWidget {
-  const CoursePurchaseSection({super.key, required this.price, this.sectionKey, required this.course});
+  CoursePurchaseSection({super.key, required this.cartId, required this.price, this.sectionKey, required this.course});
 
   final String price;
   final CourseDetailModel course;
+  final int cartId;
 
   final Key? sectionKey;
+    final CartController controller = CartController(CartRepository(CartService()));
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +66,9 @@ class CoursePurchaseSection extends StatelessWidget {
               width: UDeviceHelper.getScreenWidth(context),
               bgColor: Colors.transparent,
               borderColor: Colors.white,
-              onPressed: () {},
+              onPressed: () {
+                controller.removeItem(cartId);
+              },
               child: Text(
                 "Remove from cart",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),

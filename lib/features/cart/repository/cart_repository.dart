@@ -2,11 +2,15 @@ import '../models/cart_model.dart';
 import '../services/cart_service.dart';
 
 class CartRepository {
-  final CartService _service;
+  final CartService service;
 
-  CartRepository(this._service);
+  CartRepository(this.service);
 
   Future<List<CartModel>> getCart() async {
-    return await _service.getCart();
+    return await service.getCart();
+  }
+
+  Future<bool> removeFromCart(int id, String token) {
+    return service.removeFromCart(id, token);
   }
 }

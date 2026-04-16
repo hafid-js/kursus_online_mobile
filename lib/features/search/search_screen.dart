@@ -126,7 +126,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     Wrap(
                       alignment: WrapAlignment.start,
-                      spacing: 16,
+                      spacing: 8,
                       runSpacing: 8,
                       children: tags.map((tag) {
                         return GestureDetector(
@@ -137,8 +137,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
+                              horizontal: 15,
+                              vertical: 8,
                             ),
                             decoration: BoxDecoration(
                               border: BoxBorder.all(color: Colors.white),
@@ -156,6 +156,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         );
                       }).toList(),
                     ),
+
+                    SizedBox(height: 14),
 
                     Obx(() {
                       if (controller.isLoading.value) {

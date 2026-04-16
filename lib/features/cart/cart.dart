@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:kursus_online_mobile/common/widgets/cards/course_card.dart';
 import 'package:kursus_online_mobile/common/widgets/images/rounded_image.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
+import 'package:kursus_online_mobile/core/network/api_client.dart';
 import 'package:kursus_online_mobile/features/cart/models/cart_model.dart';
 import 'package:kursus_online_mobile/features/cart/services/cart_service.dart';
 import 'package:kursus_online_mobile/features/course/course.dart';
 import 'package:kursus_online_mobile/features/course_detail/services/course_detail_service.dart';
+import 'package:kursus_online_mobile/features/search/controllers/category_controller.dart';
+import 'package:kursus_online_mobile/features/search/repositories/category_repository.dart';
+import 'package:kursus_online_mobile/features/search/services/category_service.dart';
 import 'package:kursus_online_mobile/features/search/widgets/search_categories.dart';
+import 'package:kursus_online_mobile/features/subcategories/subcategories.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+   late final CategoryController controller;
+
+
+    @override
+  void initState() {
+    super.initState();
+    controller = Get.put(
+      CategoryController(CategoryRepository(CategoryService(ApiClient.dio))),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,18 +101,20 @@ class CartScreen extends StatelessWidget {
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                       SizedBox(height: 40),
-                    SearchCategories(title: "Development"),
-                    SearchCategories(title: "IT & Software"),
-                    SearchCategories(title: "Business"),
-                    SearchCategories(title: "Finance & Accounting"),
-                    SearchCategories(title: "Office Productivity"),
-                    SearchCategories(title: "Design"),
-                    SearchCategories(title: "Marketing"),
-                    SearchCategories(title: "Lifestyle"),
-                    SearchCategories(title: "Photography & Video"),
-                    SearchCategories(title: "Health & Fitness"),
-                    SearchCategories(title: "Music"),
-                    SearchCategories(title: "Teaching & Academics"),
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      return Wrap(
+                        children: controller.categories.map((category) {
+                          return InkWell(
+                            onTap: () => Get.to(() => SubCategoriesScreen(), arguments: category.id),
+                            child: SearchCategories(title: category.name),
+                          );
+                        }).toList(),
+                      );
+                    }),
                   ],
                 ),
                 )
@@ -109,7 +133,7 @@ class CartScreen extends StatelessWidget {
                       cart.courseDetail.slug,
                     );
 
-                    Get.to(() => CourseScreen(courseDetail: courseDetail));
+                    Get.to(() => CourseScreen(courseDetail: courseDetail, cartId: cart.id));
                   },
                   child: UCourseCard(courseDetail: cart.courseDetail),
                 );

@@ -6,12 +6,12 @@ class UDescription extends StatefulWidget {
     super.key,
     this.title,
     required this.description,
-    this.isShowMore,
+    this.isShowMore = true,
   });
 
   final String? title;
   final String? description;
-  final bool? isShowMore;
+  final bool isShowMore;
 
   @override
   State<UDescription> createState() => _UDescriptionState();
@@ -19,35 +19,30 @@ class UDescription extends StatefulWidget {
 
 class _UDescriptionState extends State<UDescription> {
   bool isExpanded = false;
-  late bool isShowMore;
 
-  @override
-  void initState() {
-    super.initState();
-
-    isShowMore = widget.isShowMore ?? true;
-  }
-
+  bool get hasValidDescription =>
+      widget.description != null &&
+      widget.description!.trim().isNotEmpty &&
+      widget.description != '-';
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-             if (isShowMore)
-            Text(
-              "Description",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+        // Row(
+        //   children: [
+        //      if (isShowMore)
+        //     Text(
+        //       "Description",
+        //       style: TextStyle(
+        //         color: Colors.white,
+        //         fontSize: 18,
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
 
-            
-          ],
-        ),
+        //   ],
+        // ),
         if (widget.title != null)
           Row(
             children: [
@@ -63,7 +58,7 @@ class _UDescriptionState extends State<UDescription> {
           ),
 
         const SizedBox(height: 4),
-        if (isShowMore)
+        if (widget.isShowMore)
           Text(
             widget.description ?? '',
             style: const TextStyle(color: Colors.white),
@@ -71,24 +66,27 @@ class _UDescriptionState extends State<UDescription> {
             overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
           )
         else
-          Text(widget.description ??'', style: const TextStyle(color: Colors.white)),
+          Text(
+            widget.description ?? '',
+            style: const TextStyle(color: Colors.white),
+          ),
 
         const SizedBox(height: 8),
-            if (isShowMore)
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          child: Text(
-            isExpanded ? "Show less" : "Show more",
-            style: TextStyle(
-              color: HexColor.fromHex("#9432C5"),
-              fontWeight: FontWeight.bold,
+        if (widget.isShowMore && hasValidDescription)
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+              });
+            },
+            child: Text(
+              isExpanded ? "Show less" : "Show more",
+              style: TextStyle(
+                color: HexColor.fromHex("#9432C5"),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
       ],
     );
   }
