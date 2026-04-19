@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kursus_online_mobile/constants/helpers/hex_color.dart';
 
 class USectionHeading extends StatelessWidget {
   const USectionHeading({
@@ -23,11 +22,11 @@ class USectionHeading extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        Expanded(child: Text(
           title,
-          style: TextStyle(fontSize: titleSize ?? 16, fontWeight: FontWeight.bold, color: Colors.white), maxLines: 1, overflow: TextOverflow.ellipsis,
-        ),
-        if(showActionButton) TextButton(onPressed: onPressed, child: Text(buttonTitle ?? '', style: TextStyle(color: HexColor.fromHex("#020381"), fontSize: 14),)),
+          style: TextStyle(fontSize: titleSize ?? 16, fontWeight: FontWeight.bold, color: Colors.white),
+        ),),
+        if(showActionButton) TextButton(onPressed: onPressed, child: Text(buttonTitle ?? '', style: TextStyle(color: Colors.purpleAccent, fontSize: 14),)),
       ],
     );
   }

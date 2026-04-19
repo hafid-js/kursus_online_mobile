@@ -15,4 +15,5 @@ class ApiEndpoints {
   static String instructorCourses(int instructorId) => "/instructors/$instructorId/courses";
 
   static const categories = "/categories";
+  static const featuredCourses = "/recommended-courses";
 }

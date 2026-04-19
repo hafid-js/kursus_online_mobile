@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kursus_online_mobile/constants/colors.dart';
 import 'package:kursus_online_mobile/features/cart/cart.dart';
+import 'package:kursus_online_mobile/features/home/featured_screen.dart';
 import 'package:kursus_online_mobile/features/home/home.dart';
 import 'package:kursus_online_mobile/features/enrolled_course/screens/enrolled_course_screen.dart';
 import 'package:kursus_online_mobile/features/profile/screen/profile.dart';
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    HomeScreen(),
+    FeaturedScreen(),
     SearchScreen(),
     EnrolledCourseScreen(),
     CartScreen(),
